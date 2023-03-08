@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TechHub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-title">
+        Inventory Search
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="top-sidebar">
+        <img class="towson-logo" src="images/Towson logo.png">
+      </div>
+      <div class="middle-sidebar">
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="images/icons8-in-inventory-30.png">
+          </div>
+          <h2 class="sidebar-link">Inventory</h2>
+        </div>
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="images/icons8-in-inventory-30.png">
+          </div>
+          <h2 class="sidebar-link">Make Request</h2>
+        </div>
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="images/icons8-in-inventory-30.png">
+          </div>
+          <h2 class="sidebar-link">My Profile</h2>
+        </div>
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="images/icons8-in-inventory-30.png">
+          </div>
+          <h2 class="sidebar-link">Important Links</h2>
+        </div>
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="images/icons8-in-inventory-30.png">
+          </div>
+          <h2 class="sidebar-link">Techhub Info</h2>
+        </div>
+      </div>
+      <div class="bottom-sidebar">
+        <div>Thomas Riesett</div>
+      </div>
+    </div>
+    
+
+    <div class="main">
+      <div class="top">
+        <h2 class="name">Hello Thomas!</h2>
+        <nav class="btn-nav">
+          <button class="btn">Option 1</button>
+          <button class="btn">Option 2</button>
+          <button class="btn">Option 3</button>
+        </nav>
+        <p class="widgets">Widgets</p>
+      </div>
+      <div id="content">
+        <h2 class="content-inventory">Inventory</h2>
+        <div id="button-wrapper">
+          <button type="button" class="collapsible">Audio</button>
+          <div class="exapnd-content">
+            <table>
+              <thead>
+                <th>A</th>
+                <th>A</th>
+                <th>A</th>
+                <th>A</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                  <td>b</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                    <td>b</td>
+                    <td>b</td>
+                    <td>b</td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+
+          <button type="button" class="collapsible">Visual</button>
+          <div class="exapnd-content">
+            <p>Here I am</p>
+          </div>
+
+          <button type="button" class="collapsible">Other</button>
+          <div class="exapnd-content">
+            <p>CLOSE ME</p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
+  <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
