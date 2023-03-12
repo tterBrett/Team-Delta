@@ -1,12 +1,16 @@
 CREATE DATABASE Inventory; 
+--Current Inventory and Cataloging as of the Spring of 2023 semester:
+--Amount of items in commented tags listed may change for future additions and removals of devices.
+
+--Mouses Table:
 
 DROP TABLE IF EXISTS MSE; 
 
 CREATE TABLE MSE 
 (
 	unique_ID varchar(4) PRIMARY KEY,
-	Brand char(10), 
-	Checked_out bit 
+	brand char(10), 
+	checked_Out bit 
 ); 
 
 INSERT INTO MSE VALUES ('0001', 'Dell', 0); 
@@ -124,27 +128,82 @@ INSERT INTO MSE VALUES ('0102', 'Apple', 0);
 INSERT INTO MSE VALUES ('0103', 'Apple', 0);
 INSERT INTO MSE VALUES ('0104', 'Apple', 0);
 
+--Keyboards Table:
+
 DROP TABLE IF EXISTS KeyB; 
 
 CREATE TABLE KeyB
 (
 	unique_ID varchar(4) PRIMARY KEY, 
-	Brand char(10), 
+	brand char(10), 
 	checked_Out bit
 ); 
+--57 Keyboards and then 1 Keyboard with a Mouse included but it is counted as just a keyboard.
+INSERT INTO KeyB VALUES ('0001', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0002', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0003', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0004', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0005', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0006', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0007', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0008', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0009', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0010', 'Dell', 0);
 
-INSERT INTO KeyB VALUES ('0001', 'Dell', 0); 
+INSERT INTO KeyB VALUES ('0011', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0012', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0013', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0014', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0015', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0016', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0017', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0018', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0019', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0020', 'Dell', 0);
 
-DROP TABLE IF EXISTS USB;
+INSERT INTO KeyB VALUES ('0021', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0022', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0023', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0024', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0025', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0026', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0027', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0028', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0029', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0030', 'Dell', 0);
 
-CREATE TABLE USB
-(
-	unique_ID varchar(4) PRIMARY KEY,
-	checked_Out bit
-);
+INSERT INTO KeyB VALUES ('0031', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0032', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0033', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0034', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0035', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0036', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0037', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0038', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0039', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0040', 'Dell', 0);
 
-INSERT INTO USB VALUES ('0001', 0); 
+INSERT INTO KeyB VALUES ('0041', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0042', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0043', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0044', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0045', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0046', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0047', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0048', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0049', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0050', 'Dell', 0);
 
+INSERT INTO KeyB VALUES ('0051', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0052', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0053', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0055', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0055', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0056', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0057', 'Dell', 0);
+INSERT INTO KeyB VALUES ('0058', 'Dell', 0);
+
+--Ethernet Cables Table:
 DROP TABLE IF EXISTS Ethernet; 
 
 CREATE TABLE Ethernet
@@ -154,7 +213,7 @@ CREATE TABLE Ethernet
 	checked_Out bit
 );
 
---Short Ethernet Cables;
+--53 Short Ethernet Cables;
 INSERT INTO Ethernet VALUES ('0001', 0, 0); 
 INSERT INTO Ethernet VALUES ('0002', 0, 0);
 INSERT INTO Ethernet VALUES ('0003', 0, 0);
@@ -213,7 +272,7 @@ INSERT INTO Ethernet VALUES ('0051', 0, 0);
 INSERT INTO Ethernet VALUES ('0052', 0, 0);
 INSERT INTO Ethernet VALUES ('0053', 0, 0);
 
---Long Ethernet Cables:
+--19 Long Ethernet Cables:
 INSERT INTO Ethernet VALUES ('0054', 1, 0); 
 INSERT INTO Ethernet VALUES ('0055', 1, 0); 
 INSERT INTO Ethernet VALUES ('0056', 1, 0); 
@@ -234,22 +293,516 @@ INSERT INTO Ethernet VALUES ('0070', 1, 0);
 INSERT INTO Ethernet VALUES ('0071', 1, 0); 
 INSERT INTO Ethernet VALUES ('0072', 1, 0); 
 
---All Queries:
+DROP TABLE IF EXISTS Audio;
 
+CREATE TABLE Audio
+(
+	unique_ID varchar(4) PRIMARY KEY,
+	checked_Out bit,
+	cable_type varchar(5)
+);
+
+--mic, con, or aux
+
+DROP TABLE IF EXISTS Visuals; 
+
+CREATE TABLE Visuals
+(
+	unique_ID varchar(4) PRIMARY KEY,
+	cable_type varchar(10),
+	name varchar(20),
+	checked_Out bit
+);
+
+--43 DVI Cables:
+INSERT INTO Visuals VALUES ('0001', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0002', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0003', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0004', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0005', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0006', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0007', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0008', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0009', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0010', 'dvi', 'DVIcable', 0);
+
+INSERT INTO Visuals VALUES ('0011', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0012', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0013', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0014', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0015', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0016', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0017', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0018', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0019', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0020', 'dvi', 'DVIcable', 0);
+
+INSERT INTO Visuals VALUES ('0021', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0022', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0023', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0024', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0025', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0026', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0027', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0028', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0029', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0030', 'dvi', 'DVIcable', 0);
+
+INSERT INTO Visuals VALUES ('0040', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0041', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0042', 'dvi', 'DVIcable', 0);
+INSERT INTO Visuals VALUES ('0043', 'dvi', 'DVIcable', 0);
+
+--17 VGA Cables: 
+INSERT INTO Visuals VALUES ('0044', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0045', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0046', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0047', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0048', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0049', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0050', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0051', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0052', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0053', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0054', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0055', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0056', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0057', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0058', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0059', 'vga', 'VGAcable', 0);
+INSERT INTO Visuals VALUES ('0060', 'vga', 'VGAcable', 0);
+
+--2 VGA to DVI Cables:
+INSERT INTO Visuals VALUES ('0061', 'vga', 'VGAtoDVI', 0);
+INSERT INTO Visuals VALUES ('0062', 'vga', 'VGAtoDVI', 0);
+
+--4 Ethernet to VGA Cables: 
+INSERT INTO Visuals VALUES ('0063', 'vga', 'EthernettoVGA', 0);
+INSERT INTO Visuals VALUES ('0064', 'vga', 'EthernettoVGA', 0);
+INSERT INTO Visuals VALUES ('0065', 'vga', 'EthernettoVGA', 0);
+INSERT INTO Visuals VALUES ('0066', 'vga', 'EthernettoVGA', 0);
+
+--4 DVI to HDMI Cables:
+INSERT INTO Visuals VALUES ('0067', 'dvi', 'DVItoHDMI', 0); 
+INSERT INTO Visuals VALUES ('0068', 'dvi', 'DVItoHDMI', 0); 
+INSERT INTO Visuals VALUES ('0069', 'dvi', 'DVItoHDMI', 0); 
+INSERT INTO Visuals VALUES ('0070', 'dvi', 'DVItoHDMI', 0); 
+
+--25 HDMI Cables: 
+INSERT INTO Visuals VALUES ('0071', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0072', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0073', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0074', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0076', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0077', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0078', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0079', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0080', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0081', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0082', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0083', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0084', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0085', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0086', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0087', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0088', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0089', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0090', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0091', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0092', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0093', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0094', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0095', 'hdmi', 'HDMIcable', 0);
+INSERT INTO Visuals VALUES ('0096', 'hdmi', 'HDMIcable', 0);
+
+--5 DVI to VGA Adapter Cables:
+INSERT INTO Visuals VALUES ('0097', 'dvi', 'DVItoVGAAdapt', 0); 
+INSERT INTO Visuals VALUES ('0098', 'dvi', 'DVItoVGAAdapt', 0); 
+INSERT INTO Visuals VALUES ('0099', 'dvi', 'DVItoVGAAdapt', 0); 
+INSERT INTO Visuals VALUES ('0100', 'dvi', 'DVItoVGAAdapt', 0); 
+INSERT INTO Visuals VALUES ('0101', 'dvi', 'DVItoVGAAdapt', 0); 
+
+--1 Dock to iPad:
+INSERT INTO Visuals VALUES ('0102', 'misc', 'DocktoIpad', 0);
+
+--1 IP5 to HDMI:
+INSERT INTO Visuals VALUES ('0103', 'hdmi', 'IP5toHDMI', 0);
+
+--4 Display Ports: 
+INSERT INTO Visuals VALUES ('0104', 'display', 'DisplayPort', 0);
+INSERT INTO Visuals VALUES ('0105', 'display', 'DisplayPort', 0);
+INSERT INTO Visuals VALUES ('0106', 'display', 'DisplayPort', 0);
+INSERT INTO Visuals VALUES ('0107', 'display', 'DisplayPort', 0);
+
+--3 Display Port to HDMI:
+INSERT INTO Visuals VALUES ('0108', 'display', 'DisiplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0109', 'display', 'DisiplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0110', 'display', 'DisiplaytoHDMI', 0);
+
+--3 Display to DVI:
+INSERT INTO Visuals VALUES ('0111', 'display', 'DisplaytoDVI', 0);
+INSERT INTO Visuals VALUES ('0112', 'display', 'DisplaytoDVI', 0);
+INSERT INTO Visuals VALUES ('0113', 'display', 'DisplaytoDVI', 0);
+
+--4 miniHDMI to HDMI:
+INSERT INTO Visuals VALUES ('0114', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0115', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0116', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0117', 'hdmi', 'miniHDMI to HDMI', 0);
+
+--9 more HDMI to miniHDMI:
+INSERT INTO Visuals VALUES ('0118', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0119', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0120', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0121', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0122', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0123', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0124', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0125', 'hdmi', 'miniHDMI to HDMI', 0);
+INSERT INTO Visuals VALUES ('0126', 'hdmi', 'miniHDMI to HDMI', 0);
+
+--1 minihdmi to usb:
+INSERT INTO Visuals VALUES ('0127', 'hdmi', 'miniHDMItoUSB', 0); 
+
+--7 more Display Port Cables:
+INSERT INTO Visuals VALUES ('0128', 'display', 'DisplayPort', 0); 
+INSERT INTO Visuals VALUES ('0129', 'display', 'DisplayPort', 0); 
+INSERT INTO Visuals VALUES ('0130', 'display', 'DisplayPort', 0); 
+INSERT INTO Visuals VALUES ('0131', 'display', 'DisplayPort', 0); 
+INSERT INTO Visuals VALUES ('0132', 'display', 'DisplayPort', 0); 
+INSERT INTO Visuals VALUES ('0133', 'display', 'DisplayPort', 0); 
+INSERT INTO Visuals VALUES ('0134', 'display', 'DisplayPort', 0); 
+
+--1 micro HDMI:
+INSERT INTO Visuals VALUES ('0135', 'hdmi', 'MicroHDMI', 0);
+
+--4 Display to HDMI:
+INSERT INTO Visuals VALUES ('0136', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0137', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0138', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0139', 'display', 'DisplaytoHDMI', 0);
+
+--1 Display Port to VGA:
+INSERT INTO Visuals VALUES ('0140', 'display', 'DisplaytoVGA', 0);
+
+--2 Display Port to mini Display Port:
+INSERT INTO Visuals VALUES ('0141', 'display', 'DisplaytoMiniDisplay', 0);
+INSERT INTO Visuals VALUES ('0142', 'display', 'DisplaytoMiniDisplay', 0);
+
+
+
+--vga, hdmi, display, adapt, misc
+
+DROP TABLE IF EXISTS PowerSupply;
+
+CREATE TABLE PowerSupply
+(
+	unique_ID varchar(4) PRIMARY KEY,
+	checked_Out bit,
+	device_type varchar(5)
+);
+
+
+--power, charg, strip, 
+
+DROP TABLE IF EXISTS FireWall;
+
+CREATE TABLE FireWall
+(
+	unique_ID varchar(4) PRIMARY KEY,
+	brand varchar(10),
+	name varchar(10),
+	checked_Out bit
+
+);
+
+INSERT INTO FireWall VALUES ('0001', 'Cisco', 'pix501', 0);
+INSERT INTO FireWall VALUES ('0002', 'Cisco', 'pix515e', 0);
+
+--
+
+DROP TABLE IF EXISTS  Switches;
+
+CREATE TABLE Switches
+(
+	unique_ID varchar(4) PRIMARY KEY,
+	brand varchar(10),
+	name varchar(15),
+	checked_Out bit
+);
+--18 Total Switches:
+INSERT INTO Switches VALUES ('0001', 'Juniper', 'srx210', 0);
+INSERT INTO Switches VALUES ('0002', 'Juniper', 'ex2200c', 0); 
+INSERT INTO Switches VALUES ('0003', 'Cisco', '3560', 0); 
+INSERT INTO Switches VALUES ('0004', 'Cisco', '3560', 0); 
+INSERT INTO Switches VALUES ('0005', 'Cisco', '3560G', 0); 
+INSERT INTO Switches VALUES ('0006', 'Cisco', '3560CG', 0); 
+INSERT INTO Switches VALUES ('0007', 'Cisco', '3560CG', 0); 
+INSERT INTO Switches VALUES ('0008', 'Cisco', '3750', 0); 
+INSERT INTO Switches VALUES ('0009', 'Cisco', '2950', 0);
+INSERT INTO Switches VALUES ('0010', 'Cisco', '2950', 0);
+INSERT INTO Switches VALUES ('0011', 'Cisco', '2960G', 0); 
+INSERT INTO Switches VALUES ('0012', 'Cisco', '1800', 0); 
+INSERT INTO Switches VALUES ('0013', 'Cisco', 'SG300-10', 0); 
+INSERT INTO Switches VALUES ('0014', 'Cisco', 'SG300-10', 0); 
+INSERT INTO Switches VALUES ('0015', 'Cisco', 'SR2024', 0); 
+INSERT INTO Switches VALUES ('0016', 'Cisco', 'Wifi Card', 0);
+INSERT INTO Switches VALUES ('0017', 'Cisco', 'Wi-Spy', 0);
+INSERT INTO Switches VALUES ('0018', 'Cisco', 'Wi-Spy', 0); 
+
+
+--USB Table:
+
+DROP TABLE IF EXISTS USB;
+
+CREATE TABLE USB
+(
+	unique_ID varchar(4) PRIMARY KEY,
+	connector varchar(10),
+	name varchar(20),
+	checked_Out bit
+);
+
+--ext, usbC, adapt, micro, flash, atob, type3, misc
+
+--6 USB Extension Cables
+INSERT INTO USB VALUES ('0001', 'ext', 'USBExt', 0);
+INSERT INTO USB VALUES ('0002', 'ext', 'USBExt', 0); 
+INSERT INTO USB VALUES ('0003', 'ext', 'USBExt', 0);
+INSERT INTO USB VALUES ('0004', 'ext', 'USBExt', 0);
+INSERT INTO USB VALUES ('0005', 'ext', 'USBExt', 0); 
+INSERT INTO USB VALUES ('0006', 'ext', 'USBExt', 0); 
+
+--5 USB 2.O Extension Cables
+INSERT INTO USB VALUES ('0007', 'ext', 'USB2.0', 0); 
+INSERT INTO USB VALUES ('0008', 'ext', 'USB2.0', 0);
+INSERT INTO USB VALUES ('0009', 'ext', 'USB2.0', 0); 
+INSERT INTO USB VALUES ('0010', 'ext', 'USB2.0', 0);
+INSERT INTO USB VALUES ('0011', 'ext', 'USB2.0', 0);
+
+--8 6in USB 3.0 Extension Cables:
+INSERT INTO USB VALUES ('0012', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0013', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0014', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0015', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0016', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0017', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0018', 'ext', 'USB3', 0); 
+INSERT INTO USB VALUES ('0019', 'ext', 'USB3', 0); 
+
+--3 USB A extension Cables: 
+INSERT INTO USB VALUES ('0020', 'ext', 'USBA', 0); 
+INSERT INTO USB VALUES ('0021', 'ext', 'USBA', 0);
+INSERT INTO USB VALUES ('0022', 'ext', 'USBA', 0);
+
+--1 USB A-B: 
+INSERT INTO USB VALUES ('0023', 'misc', 'USBAtoB', 0);
+
+--10 micro-usb cables: 
+INSERT INTO USB VALUES ('0024', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0025', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0026', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0027', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0028', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0029', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0030', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0031', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0032', 'micro', 'microUSB', 0);
+INSERT INTO USB VALUES ('0033', 'micro', 'microUSB', 0);
+
+--4 USB to type 3: 
+INSERT INTO USB VALUES ('0034', 'type3', 'usbtotype3', 0);
+INSERT INTO USB VALUES ('0035', 'type3', 'usbtotype3', 0);
+INSERT INTO USB VALUES ('0036', 'type3', 'usbtotype3', 0);
+INSERT INTO USB VALUES ('0037', 'type3', 'usbtotype3', 0);
+
+--6 USBC to male type A:
+INSERT INTO USB VALUES ('0038', 'usbc', 'USBCtoMaleA', 0);
+INSERT INTO USB VALUES ('0039', 'usbc', 'USBCtoMaleA', 0);
+INSERT INTO USB VALUES ('0040', 'usbc', 'USBCtoMaleA', 0);
+INSERT INTO USB VALUES ('0041', 'usbc', 'USBCtoMaleA', 0);
+INSERT INTO USB VALUES ('0042', 'usbc', 'USBCtoMaleA', 0);
+INSERT INTO USB VALUES ('0043', 'usbc', 'USBCtoMaleA', 0);
+
+--3 USBC to USBC:
+INSERT INTO USB VALUES ('0044', 'usbc', 'USBCtoC', 0); 
+INSERT INTO USB VALUES ('0045', 'usbc', 'USBCtoC', 0);
+INSERT INTO USB VALUES ('0046', 'usbc', 'USBCtoC', 0); 
+
+--6 USBC to female tpye A: 
+INSERT INTO USB VALUES ('0047', 'usbc', 'USBCtoFemaleA', 0);
+INSERT INTO USB VALUES ('0048', 'usbc', 'USBCtoFemaleA', 0);
+INSERT INTO USB VALUES ('0049', 'usbc', 'USBCtoFemaleA', 0);
+INSERT INTO USB VALUES ('0050', 'usbc', 'USBCtoFemaleA', 0);
+INSERT INTO USB VALUES ('0051', 'usbc', 'USBCtoFemaleA', 0);
+INSERT INTO USB VALUES ('0052', 'usbc', 'USBCtoFemaleA', 0);
+
+--1 Fire Wire to Micro USB:
+INSERT INTO USB VALUES ('0053', 'misc', 'FireWiretoMicroUSB', 0);
+
+--1 USB to Ethernet adapter:
+INSERT INTO USB VALUES ('0054', 'misc', 'USBtoEthernetAdapter', 0); 
+
+--1 USB Male Type A to USB External Female Type A: 
+INSERT INTO USB VALUES ('0055', 'misc', 'MaleAtoFemaleA', 0); 
+
+--1 Type A to micro B:
+INSERT INTO USB VALUES ('0056', 'misc', 'TypeAtoMicroB', 0); 
+
+--1 USB to VGA:
+INSERT INTO USB VALUES ('0057', 'misc', 'USBtoVGA', 0);
+
+--2 16gb usb flash drive:
+INSERT INTO USB VALUES ('0058', 'flash', '16gbUSBDrive', 0);
+INSERT INTO USB VALUES ('0059', 'flash', '16gbUSBDrive', 0);
+
+--1 USB Block:
+INSERT INTO USB VALUES ('0060', 'misc', 'USBBlock', 0);
+
+--USB-C to Type B:
+INSERT INTO USB VALUES ('0061', 'usbc', 'USBCtoTypeB', 0);
+
+--Potentially add in name descriptions but search in the query by the varchars.
+
+
+
+--All Queries: (Some will be used for admin account and some for the users view for checking items out.)
+
+--All MSE Queries
 --Grab all Mouses:
 SELECT * FROM MSE; 
+--Grab all available Mouses:
+SELECT MSE.unique_ID, MSE.brand, MSE.checked_Out FROM MSE
+WHERE MSE.checked_Out = 0; 
+--Grab all checked out Mouses: 
+SELECT MSE.unique_ID, MSE.brand, MSE.checked_Out FROM MSE
+WHERE MSE.checked_Out = 1;
 
---Grab all keyboards:
+
+--All KeyB Queries:
+--Grab all Keyboards:
 SELECT *FROM KeyB;
+--Grab all checked out keyboards: 
+SELECT KeyB.unique_ID, KeyB.brand, Keyb.checked_Out FROM KeyB
+WHERE KeyB.checked_Out = 0;
+--Grab all avaiable keyboards: 
+SELECT KeyB.unique_ID, KeyB.brand, Keyb.checked_Out FROM KeyB
+WHERE KeyB.checked_Out = 1;
 
+
+--All USB Queries:
 --Grab all USBs: 
 SELECT * FROM USB; 
+--Grab all available USBs:
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.checked_Out = 0; 
 
+--Grab all checked out USBs:
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.checked_Out = 1;
+
+--Grab all available USB Extension Cables: 
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.connector = 'ext' AND USB.checked_Out = 0;
+
+--Grab all available USBC USBs:
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.connector = 'usbc' AND USB.checked_Out = 0;
+
+--Grab all available USB tpye 3:
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.connector = 'type3' AND USB.checked_Out = 0;
+
+--Grab all available Micro USBs:
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.connector = 'micro' AND USB.checked_Out = 0;
+
+--Grab all available USB flash drives:
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.connector = 'flash' AND USB.checked_Out = 0;
+
+--Grab all available Miscellaneous USBs: 
+SELECT USB.unique_ID, USB.connector, USB.name, USB.checked_Out FROM USB
+WHERE USB.connector = 'misc' AND USB.checked_Out = 0;
+
+
+--All Ethernet Queries:
 --Grab all Ethernet Cables: 
 SELECT * FROM Ethernet; 
 --Grab all short Ethernet Cables: 
 SELECT Ethernet.unique_ID, is_Long, Ethernet.checked_Out FROM Ethernet
-WHERE Ethernet.is_Long = 0; 
+WHERE Ethernet.is_Long = 0;
+
 --Grab all long Ethernet Cables:
 SELECT Ethernet.unique_ID, Ethernet.checked_Out, is_Long FROM Ethernet
-WHERE is_Long = 1; 
+WHERE is_Long = 1;
+
+--Grab all available Ethernet cables: 
+SELECT Ethernet.unique_ID, Ethernet.is_Long, Ethernet.checked_Out FROM Ethernet
+WHERE Ethernet.checked_Out = 0;
+
+--Grab all checked out Ethernet Cables:
+SELECT Ethernet.unique_ID, Ethernet.is_Long, Ethernet.checked_Out FROM Ethernet
+WHERE Ethernet.checked_Out = 1; 
+
+--All Switches Queries: 
+--Grab all Switches: 
+SELECT * FROM Switches;
+--Grab all available Switches: 
+SELECT Switches.unique_ID, Switches.brand, Switches.name, Switches.checked_Out FROM Switches
+WHERE Switches.checked_Out = 0; 
+
+--Grab all checked out Swtiches: 
+SELECT Switches.unique_ID, Switches.brand, Switches.name, Switches.checked_Out FROM Switches
+WHERE Switches.checked_Out = 1; 
+
+--Grab all available Juniper Switches: 
+SELECT Switches.unique_ID, Switches.brand, Switches.name, Switches.checked_Out FROM Switches
+WHERE Switches.checked_Out = 0 AND Switches.brand = 'Juniper';
+
+--Grab all available Cisco Switches:
+SELECT Switches.unique_ID, Switches.brand, Switches.name, Switches.checked_Out FROM Switches
+WHERE Switches.checked_Out = 0 AND Switches.brand = 'Cisco';
+
+
+--Grab all Firewalls: 
+SELECT * FROM FireWall; 
+--Grab all available FireWalls: 
+SELECT FireWall.unique_ID, FireWall.brand, FireWall.name, FireWall.checked_Out FROM FireWall
+WHERE FireWall.checked_Out = 0; 
+
+--Grab all checked out Firewalls:
+SELECT FireWall.unique_ID, FireWall.brand, FireWall.name, FireWall.checked_Out FROM FireWall
+WHERE FireWall.checked_Out = 1;
+
+
+--All Visuals Queries: 
+--Grab all Visual Cables:
+SELECT * FROM Visuals; 
+--Grab all available Visuals:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.checked_Out = 0;
+
+--Grab all checked out Visual Cables:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.checked_Out = 1;
+
+--Grab all available Display Port Cables:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.cable_type = 'display' AND Visuals.checked_Out = 0;
+
+--Grab all available HDMI cables:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.cable_type = 'hdmi' AND Visuals.checked_Out = 0;
+
+--Grab all available VGA cables:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.cable_type = 'vga' AND Visuals.checked_Out = 0;
+
+--Grab all available DVI cables:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.cable_type = 'dvi' AND Visuals.checked_Out = 0;
+
+--Grab all Miscellaneous Visual Cables:
+SELECT Visuals.unique_ID, Visuals.cable_type, Visuals.name, Visuals.checked_Out FROM Visuals
+WHERE Visuals.cable_type = 'misc' AND Visuals.checked_Out = 0;
