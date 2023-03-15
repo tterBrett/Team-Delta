@@ -1,7 +1,7 @@
 #content{
     margin-left: auto;
     margin-right: auto;
-    display: flex;
+    /* display: flex; */
     justify-content: left;
     text-align: center;
     width: 60%;
@@ -92,4 +92,39 @@ tr, td{
 
 thead{
     border-bottom: 1px solid black;
+}
+
+a, a:visited, a:hover, a:active{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#form-header{
+    text-align: center;
+    width: 100%;
+    padding: none;
+    font-size: 32px;
+    font-weight: bold;
+}
+#form-header hr{
+    background-color: black;
+    height: 2px;
+    width: 100%;
+}
+
+#form-content{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.flex-item{
+    width: 50%;
+    
+}
+
+#submit{
+    justify-content: center;
+    margin-top: 5%;
 }
