@@ -34,7 +34,7 @@ app.get("/",  (req, res) => {
 app.get("/api/:table", (req, res) => {
     console.log("Fetching table:", req.params.table);
     
-    connection.query("SELECT * FROM inv.audio", (err, rows, fields) => {
+    connection.query(`SELECT * FROM inv.${req.params.table}`, (err, rows, fields) => {
         res.json(rows)
     })
 
