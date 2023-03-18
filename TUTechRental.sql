@@ -298,11 +298,99 @@ DROP TABLE IF EXISTS Audio;
 CREATE TABLE Audio
 (
 	unique_ID varchar(4) PRIMARY KEY,
-	checked_Out bit,
-	cable_type varchar(5)
+	cable_type varchar(10),
+	name varchar(20),
+	checked_Out bit
 );
 
---mic, con, or aux
+--1 iRig Mic:
+INSERT INTO Audio VALUES ('0001', 'mic', 'iRigMic', 0);
+
+--3.5mm 3-ring headset ext;
+INSERT INTO Audio VALUES ('0002', 'mic', '3RingExt', 0); 
+
+--Apple Lightning Headphone Jack:
+INSERT INTO Audio VALUES ('0003', 'aux', 'AppleHeadJack', 0);
+
+--Red and White and Yellow Cables:
+INSERT INTO Audio VALUES ('0004', 'con', 'RWYCables', 0);
+
+--3.5mm R/Y/W headset extension:
+INSERT INTO Audio VALUES ('0005', 'misc', 'RYWHeadExt', 0);
+
+--3 AWM E101344 Style 3527 Cable: 
+INSERT INTO Audio VALUES ('0006', 'misc', '3AWMCable', 0);
+INSERT INTO Audio VALUES ('0007', 'misc', '3AWMCable', 0);
+INSERT INTO Audio VALUES ('0008', 'misc', '3AWMCable', 0);
+
+--Red White to Aux splitter:
+INSERT INTO Audio VALUES ('0009', 'aux', 'RWAuxSplit', 0);
+
+--USBC to 3.5mm audio splitter:
+INSERT INTO Audio VALUES ('0010', 'aux', 'USBctoAuxSplitter', 0);
+
+--Apple Lightning Headphone Jack:
+INSERT INTO Audio VALUES ('0011', 'aux', 'AppleHeadJack', 0);
+
+--1 iRig Mic:
+INSERT INTO Audio VALUES ('0012', 'mic', 'iRigMic', 0);
+
+--2 AWM2464VW Cable:
+INSERT INTO Audio VALUES ('0013', 'con', 'AWMCable', 0);
+INSERT INTO Audio VALUES ('0014', 'con', 'AWMCavle', 0);
+
+--YellowWhite Aux Splitter:
+INSERT INTO Audio VALUES ('0015', 'aux', 'YellowWhiteSplit', 0);
+
+--RC59/U coax Cable (MaletoMale):
+INSERT INTO Audio VALUES ('0016', 'con', 'rc59/uCable', 0);
+
+--Berkelin Aux Table: 
+INSERT INTO Audio VALUES ('0017', 'aux', 'BerkelinTable', 0);
+
+--Labtec Aux:
+INSERT INTO Audio VALUES ('0018', 'aux', 'LabtecAux', 0);
+
+--Aux Male to Female:
+INSERT INTO Audio VALUES ('0019', 'aux', 'MaleToFemale', 0);
+
+--Small mic:
+INSERT INTO Audio VALUES ('0020', 'mic', 'SmallMic', 0);
+
+--Ezolink Green/Red Aux Splitter:
+INSERT INTO Audio VALUES ('0021', 'aux', 'GreenRedAux', 0);
+
+--Belkin Stereo Extension Cord:
+INSERT INTO Audio VALUES ('0022', 'aux', 'BelkinStereoExt', 0);
+
+--2 3.5mm aux stereo cable:
+INSERT INTO Audio VALUES ('0023', 'aux', '3.5mmStereoCable', 0);
+INSERT INTO Audio VALUES ('0024', 'aux', '3.5mmStereoCable', 0);
+
+--USB-C to audio jack:
+INSERT INTO Audio VALUES ('0025', 'misc', 'USBCtoAudioJack', 0);
+
+--Berlin Headphone Splitter:
+INSERT INTO Audio VALUES ('0026', 'misc', 'BerlinSplitter', 0);
+
+--Aux Splitter:
+INSERT INTO Audio VALUES ('0027', 'aux', 'AuxSplitter', 0); 
+
+--Ezolink Green/Red Splitter:
+INSERT INTO Audio VALUES ('0028', 'misc', 'GreenRedSplitter', 0);
+
+--Wooded Voip adapter:
+INSERT INTO Audio VALUES ('0029', 'misc', 'WoodedVoipAdapt', 0); 
+
+--Star tech 3.5mm headset adapter MMF
+INSERT INTO Audio VALUES ('0030', 'misc', 'HeadsetAdapt', 0);
+
+--4 Headset buddy phone aux splitter:
+INSERT INTO Audio VALUES ('0031', 'aux', 'HeadsetAuxSplit', 0);
+INSERT INTO Audio VALUES ('0032', 'aux', 'HeadsetAuxSplit', 0);
+INSERT INTO Audio VALUES ('0033', 'aux', 'HeadsetAuxSplit', 0);
+INSERT INTO Audio VALUES ('0034', 'aux', 'HeadsetAuxSplit', 0);
+--mic, con, aux, or misc
 
 DROP TABLE IF EXISTS Visuals; 
 
@@ -489,6 +577,9 @@ INSERT INTO Visuals VALUES ('0140', 'display', 'DisplaytoVGA', 0);
 INSERT INTO Visuals VALUES ('0141', 'display', 'DisplaytoMiniDisplay', 0);
 INSERT INTO Visuals VALUES ('0142', 'display', 'DisplaytoMiniDisplay', 0);
 
+--1 Dell S2240T Touch Monitor:
+INSERT INTO Visuals VALUES ('0143', 'misc', 'TouchMonitor', 0);
+
 
 
 --vga, hdmi, display, adapt, misc
@@ -498,12 +589,160 @@ DROP TABLE IF EXISTS PowerSupply;
 CREATE TABLE PowerSupply
 (
 	unique_ID varchar(4) PRIMARY KEY,
-	checked_Out bit,
-	device_type varchar(5)
+	device_type varchar(10),
+	name varchar(20),
+	checked_Out bit
 );
 
+--84 Computer Power Cables:
+INSERT INTO PowerSupply VALUES ('0001', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0002', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0003', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0004', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0005', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0006', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0007', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0008', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0009', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0010', 'power', 'PCPowerCable', 0);
 
---power, charg, strip, 
+INSERT INTO PowerSupply VALUES ('0011', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0012', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0013', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0014', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0015', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0016', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0017', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0018', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0019', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0020', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0021', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0022', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0023', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0024', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0025', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0026', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0027', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0028', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0029', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0030', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0031', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0032', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0033', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0034', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0035', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0036', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0037', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0038', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0039', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0040', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0041', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0042', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0043', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0044', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0045', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0046', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0047', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0048', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0049', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0050', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0051', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0052', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0053', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0054', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0055', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0056', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0057', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0058', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0059', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0060', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0061', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0062', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0063', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0064', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0065', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0066', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0067', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0068', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0069', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0070', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0071', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0072', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0073', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0074', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0075', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0076', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0077', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0078', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0079', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0080', 'power', 'PCPowerCable', 0);
+
+INSERT INTO PowerSupply VALUES ('0081', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0082', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0083', 'power', 'PCPowerCable', 0);
+INSERT INTO PowerSupply VALUES ('0084', 'power', 'PCPowerCable', 0);
+
+--1 Lenovo Charger:
+INSERT INTO PowerSupply VALUES ('0085', 'charg', 'LenovoCharger', 0);
+
+--1 Dell 7040 mini:
+INSERT INTO PowerSupply VALUES ('0086', 'misc', 'Dell7040mini', 0);
+
+--1 AC Adapter MS Surface Laptop:
+INSERT INTO PowerSupply VALUES ('0087', 'misc', 'ACAdapterMSSurface', 0);
+
+--1 XPS 12:
+INSERT INTO PowerSupply VALUES ('0088', 'misc', 'XP1S12', 0);
+
+--2 8+ robotics power cable:
+INSERT INTO PowerSupply VALUES ('0089', 'power', 'RoboticsPowCable', 0);
+INSERT INTO PowerSupply VALUES ('0090', 'power', 'RoboticsPowCable', 0);
+
+--1 HP 65W Laptop Charger:
+INSERT INTO PowerSupply VALUES ('0091', 'charg', 'HP65WCharger', 0);
+
+--3 Normal Power Strip:
+INSERT INTO PowerSupply VALUES ('0092', 'strip', 'NormalPowerStrip', 0);
+INSERT INTO PowerSupply VALUES ('0093', 'strip', 'NormalPowerStrip', 0);
+INSERT INTO PowerSupply VALUES ('0094', 'strip', 'NormalPowerStrip', 0);
+
+--1 Small Power Strip:
+INSERT INTO PowerSupply VALUES ('0095', 'strip', 'SmallPowerStrip', 0);
+
+--2 15 inch heavy duty extension cord:
+INSERT INTO PowerSupply VALUES ('0096', 'misc', 'HeavyDutyExtCord', 0);
+INSERT INTO PowerSupply VALUES ('0097', 'misc', 'HeavyDutyExtCord', 0); 
+
+--2 ISO Bar Ultra Diagnostic Surge Supressor:
+INSERT INTO PowerSupply VALUES ('0098', 'misc', 'SurgeSupressor', 0);
+INSERT INTO PowerSupply VALUES ('0099', 'misc', 'SurgeSupressor', 0);
+
+--2 Altiva Extender:
+INSERT  INTO PowerSupply VALUES ('0100', 'misc', 'AltivaExtender', 0);
+INSERT INTO PowerSupply VALUES ('0101', 'misc', 'AtivaExtender', 0);
+
+--1 App Surge Assist Power Strip:
+INSERT INTO PowerSupply VALUES ('0102', 'strip', 'AppSurgeStrip', 0);
+
+--1 smart usb charger:
+INSERT INTO PowerSupply VALUES ('0103', 'charg', 'SmartUSBCharger', 0);
+
+--2 Long Orange Extension Cord:
+INSERT INTO PowerSupply VALUES ('0104', 'misc', 'OrangeExtCord', 0);
+INSERT INTO PowerSupply VALUES ('0105', 'misc', 'OrangeExtCord', 0);
+
+--1 Long Red and Black Extension Cord:
+INSERT INTO PowerSupply VALUES ('0106', 'misc', 'ExtensionCord', 0); 
+
+
+
+--power, charg, strip, misc
 
 DROP TABLE IF EXISTS FireWall;
 
@@ -662,11 +901,32 @@ INSERT INTO USB VALUES ('0060', 'misc', 'USBBlock', 0);
 --USB-C to Type B:
 INSERT INTO USB VALUES ('0061', 'usbc', 'USBCtoTypeB', 0);
 
+--3 Fire Wires:
+INSERT INTO USB VALUES ('0062', 'misc', 'FireWire', 0);
+INSERT INTO USB VALUES ('0063', 'misc', 'FireWire', 0);
+INSERT INTO USB VALUES ('0064', 'misc', 'FireWire', 0);
+
+--2 USBC to miniHDMI:
+INSERT INTO USB VALUES ('0065', 'misc', 'USBCtominiHDMI', 0);
+INSERT INTO USB VALUES ('0066', 'misc', 'USBCtominiHDMI', 0);
+
+--1 USBC to headphone jack:
+INSERT INTO USB VALUES ('0067', 'misc', 'USBCtoHeadphoneJack', 0);
+
+--1 Micro USB to HDMI:
+INSERT INTO USB VALUES ('0068', 'micro', 'MicrotoHDMI', 0);
+
+--1 USBC to USBC:
+INSERT INTO USB VALUES ('0069', 'usbc', 'USBCtoUSBC', 0)
+
+--1 USBC to USBB: 
+INSERT INTO USB VALUES ('0070', 'usbc', 'USBCtoUSBB', 0);
+
 --Potentially add in name descriptions but search in the query by the varchars.
 
 
 
---All Queries: (Some will be used for admin account and some for the users view for checking items out.)
+--All Queries: (Some will be used for admin account and some for the users view for checking items out.
 
 --All MSE Queries
 --Grab all Mouses:
@@ -677,7 +937,6 @@ WHERE MSE.checked_Out = 0;
 --Grab all checked out Mouses: 
 SELECT MSE.unique_ID, MSE.brand, MSE.checked_Out FROM MSE
 WHERE MSE.checked_Out = 1;
-
 
 --All KeyB Queries:
 --Grab all Keyboards:
@@ -764,7 +1023,6 @@ WHERE Switches.checked_Out = 0 AND Switches.brand = 'Juniper';
 SELECT Switches.unique_ID, Switches.brand, Switches.name, Switches.checked_Out FROM Switches
 WHERE Switches.checked_Out = 0 AND Switches.brand = 'Cisco';
 
-
 --Grab all Firewalls: 
 SELECT * FROM FireWall; 
 --Grab all available FireWalls: 
@@ -774,7 +1032,6 @@ WHERE FireWall.checked_Out = 0;
 --Grab all checked out Firewalls:
 SELECT FireWall.unique_ID, FireWall.brand, FireWall.name, FireWall.checked_Out FROM FireWall
 WHERE FireWall.checked_Out = 1;
-
 
 --All Visuals Queries: 
 --Grab all Visual Cables:
