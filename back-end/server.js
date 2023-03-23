@@ -31,13 +31,19 @@ app.get("/",  (req, res) => {
 })
 
 // example
-app.get("/api/:table", (req, res) => {
+app.get("/api/tables/:table", (req, res) => {
     console.log("Fetching table:", req.params.table);
     
-    connection.query(`SELECT * FROM inv.${req.params.table}`, (err, rows, fields) => {
-        res.json(rows)
-    })
+    // connection.query("SELECT * FROM inv.audio", (err, rows, fields) => {
+    //     res.json(rows)
+    // })
 
+    res.send(`Loading table ${req.params.table}`);
+
+})
+
+app.get("/api/home", (req, res) => {
+    res.send("this is the body. you made it home");
 })
 
 app.listen(port, () => {
