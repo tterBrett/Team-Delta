@@ -19,10 +19,9 @@ app.use(express.urlencoded( { extended: true })); // URL parser to read paramete
 app.use(express.json()); // Parses incoming JSON payloads
 
 const connection = mysql.createConnection({
-    host: DB_HOST,
-    user: DB_USER,
-    port: DB_PORT,
-    password: DB_PASSWORD
+    host: 'localhost',
+    user: 'root',
+    password: 'password'
 })
 
 // get routes
@@ -34,11 +33,11 @@ app.get("/",  (req, res) => {
 app.get("/api/tables/:table", (req, res) => {
     console.log("Fetching table:", req.params.table);
     
-    // connection.query("SELECT * FROM inv.audio", (err, rows, fields) => {
-    //     res.json(rows)
-    // })
-
-    res.send(`Loading table ${req.params.table}`);
+    connection.query("Select * from Inventory.Ethernet;", (err, rows, fields) => {
+        res.json(rows)
+    })
+    
+    // res.send(`Loading table ${req.params.table}`);
 
 })
 
