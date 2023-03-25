@@ -8,9 +8,9 @@ const cors = require('cors')
 // Database variables stored in .env file
 const port = 3000;
 const DB_PORT = process.env.PORT;
-const DB_HOST = process.env.HOST;
-const DB_USER = process.env.USER;
-const DB_PASSWORD = process.env.PASSWORD;
+const DB_HOST = process.env.DB_HOST;
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
 
 //middleware 
 app.use(cors()); // CORS = Cross-Origin Resource Sharing. Current statement allows all. Would need config for production env
@@ -19,9 +19,9 @@ app.use(express.urlencoded( { extended: true })); // URL parser to read paramete
 app.use(express.json()); // Parses incoming JSON payloads
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password'
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD
 })
 
 // get routes
@@ -33,9 +33,28 @@ app.get("/",  (req, res) => {
 app.get("/api/tables/:table", (req, res) => {
     console.log("Fetching table:", req.params.table);
     
-    connection.query("Select * from Inventory.Ethernet;", (err, rows, fields) => {
-        res.json(rows)
-    })
+    if(["MSE", "KeyB"].includes(req.params.table)){
+
+        connection.query(`
+            select distinct count(unique_ID) as quantity, brand 
+            from Inventory.${req.params.table}
+            where not checked_out
+            group by brand;`,
+        (err, rows, fields) => {
+            res.json(rows)
+        });
+    }
+    else{
+        connection.query(`
+            select distinct count(unique_ID) as quantity, brand, name
+            from Inventory.${req.params.table}
+            where not checked_out
+            group by brand, name;`,
+        (err, rows, fields) => {
+            // console.log(err);
+            res.json(rows)
+        });
+    }
     
     // res.send(`Loading table ${req.params.table}`);
 

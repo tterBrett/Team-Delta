@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 
 
-  <link rel="stylesheet" type="text/css" href="../styles/test.css">
+  <link rel="stylesheet" type="text/css" href="../styles/nav.css">
   <link rel="stylesheet" types="text/css" href="../styles/styles.css">
   <script src="../scripts/items.js"></script>
 
@@ -45,10 +45,10 @@
           <h2 onclick="myFunction()" class="sidebar-link">Inventory</h2>
         </div>
         <div id="myDropdown" class="dropdown-content">
-          <a onClick="printMySelection('Cables')" >Cables</a>
-          <a href="#">Hardware</a>
-          <a href="#">Peripherals</a>
-          <a href="#">Other</a>
+          <a onClick = "gatherData('Cables')" >Cables</a>
+          <a onClick = "gatherData('Hardware')" >Hardware</a>
+          <a onClick = "gatherData('Peripherals')" >Peripherals</a>
+          <a onClick = "gatherData('Other')" >Other</a>
         </div>
       </div>
       </div>
@@ -61,6 +61,9 @@
   <div class="main">
     <div id="content">
       If you are seeing this, the item tables did not load properly
+      <div class="item-select-wrapper">
+        
+      </div>
     </div>
   </div>
 
