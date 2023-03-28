@@ -27,26 +27,27 @@ async function gatherData(selection){
 
     document.getElementsByClassName("header-title")[0].innerHTML = selection;
     // document.getElementById("content").innerHTML = selection;
-    console.log("SELECTION ", selection);
     switch(selection){
         
         case "Cales":
-            requiredTables = ["Ethernet", "HDMI"];
-
+            requiredTables = ["Ethernet"];
+            results.push(["Is Long?", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
                 const rr = await fetchData(requiredTables[i])
                 for (var y = 0; y < rr.length; y++){
-                    results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                    results.push(rr[y]);
+                    // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
                 }
             }
         
         case "Hardware":
             requiredTables = ["FireWall", "Switch"];
-
+            results.push(["brand", "name", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
                 const rr = await fetchData(requiredTables[i])
                 for (var y = 0; y < rr.length; y++){
-                    results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                    results.push(rr[y]);
+                    // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
                 }
             }
 
@@ -54,11 +55,12 @@ async function gatherData(selection){
 
         case "Peripherals":
             requiredTables = ["MSE", "KeyB"];
-
+            results.push(["brand", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
                 const rr = await fetchData(requiredTables[i])
                 for (var y = 0; y < rr.length; y++){
-                    results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
+                    results.push(rr[y]);
+                    // results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
                 }
             }
             break;
@@ -73,17 +75,47 @@ async function gatherData(selection){
 
 function drawResults(results){
     
+    // Wipping content clean if anything already exists
     let target = document.getElementById("content");
     target.innerText = "";
 
-    let wrapper = document.createElement("div");
-    wrapper.classList.add("item-select-wrapper")
+    let table_wrapper = document.createElement("div");
+    table_wrapper.classList.add("item-select-wrapper");
+    
+    let table = document.createElement("table");
+    table_wrapper.appendChild(table);
+    let table_head = document.createElement("thead");
+    table.appendChild(table_head);
 
-    results.forEach(element => {
-        let listItem = document.createElement("p")
-        listItem.innerText = element
-        wrapper.appendChild(listItem);
+    let table_head_row = document.createElement("tr");
+    table_head.appendChild(table_head_row);
+
+    // Table headers are in the first position of results aka results[0]. After this statement, they will be removed and stored in table_headers
+    let table_headers = results.shift();
+    
+    // Setting the table headers
+    table_headers.forEach(header => {
+        let headerItem = document.createElement("th")
+        headerItem.innerText = header
+        table_head_row.appendChild(headerItem);
     });
-    target.appendChild(wrapper);
+
+    // Creating the table body
+    let table_body = document.createElement("tbody");
+    table.appendChild(table_body);
+
+    // Setting the tbody content
+    results.forEach(row => {
+        let table_row = document.createElement("tr");
+        table_body.appendChild(table_row);
+
+        Object.keys(row).forEach(key => {
+            let listItem = document.createElement("td")
+            listItem.innerText = row[key];
+            table_row.appendChild(listItem);
+        });
+    })
+        
+    target.appendChild(table_wrapper);
 
 }
