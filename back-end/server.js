@@ -7,7 +7,6 @@ const cors = require('cors')
 
 // Database variables stored in .env file
 const port = 3000;
-const DB_PORT = process.env.PORT;
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = process.env.DB_PASSWORD;
@@ -36,7 +35,7 @@ app.get("/api/tables/:table", (req, res) => {
     if(["MSE", "KeyB"].includes(req.params.table)){
 
         connection.query(`
-            select distinct count(unique_ID) as quantity, brand 
+            select distinct brand, count(unique_ID) as quantity
             from Inventory.${req.params.table}
             where not checked_out
             group by brand;`,
@@ -46,7 +45,7 @@ app.get("/api/tables/:table", (req, res) => {
     }
     else{
         connection.query(`
-            select distinct count(unique_ID) as quantity, brand, name
+            select distinct brand, name, count(unique_ID) as quantity
             from Inventory.${req.params.table}
             where not checked_out
             group by brand, name;`,
