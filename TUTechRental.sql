@@ -923,6 +923,18 @@ INSERT INTO USB VALUES ('0069', 'usbc', 'USBCtoUSBC', 0);
 -- 1 USBC to USBB: 
 INSERT INTO USB VALUES ('0070', 'usbc', 'USBCtoUSBB', 0);
 
+
+DROP TABLE IF EXISTS Transaction;
+
+CREATE TABLE Transaction
+(
+	timeStamp varchar(30) PRIMARY KEY,
+    name varchar(20),
+	itemID varchar(4), 
+    tableOrigin varchar(20),
+    flow bit
+    );
+
 -- Potentially add in name descriptions but search in the query by the varchars.
 
 
