@@ -524,9 +524,9 @@ INSERT INTO Visuals VALUES ('0106', 'display', 'DisplayPort', 0);
 INSERT INTO Visuals VALUES ('0107', 'display', 'DisplayPort', 0);
 
 -- 3 Display Port to HDMI:
-INSERT INTO Visuals VALUES ('0108', 'display', 'DisiplaytoHDMI', 0);
-INSERT INTO Visuals VALUES ('0109', 'display', 'DisiplaytoHDMI', 0);
-INSERT INTO Visuals VALUES ('0110', 'display', 'DisiplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0108', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0109', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0110', 'display', 'DisplaytoHDMI', 0);
 
 -- 3 Display to DVI:
 INSERT INTO Visuals VALUES ('0111', 'display', 'DisplaytoDVI', 0);
