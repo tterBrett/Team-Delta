@@ -29,7 +29,7 @@ async function gatherData(selection){
     // document.getElementById("content").innerHTML = selection;
     switch(selection){
         
-        case "Cales":
+        case "Cables":
             requiredTables = ["Ethernet"];
             results.push(["Is Long?", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
@@ -39,6 +39,19 @@ async function gatherData(selection){
                     // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
                 }
             }
+
+
+            requiredTables = ["USB"];
+            results.push(["Name", "connector", "quantity"]);
+            for (var i = 0; i < requiredTables.length; i++) {
+                const rr = await fetchData(requiredTables[i])
+                for (var y = 0; y < rr.length; y++){
+                    results.push(rr[y]);
+                    // results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
+                }
+            }
+            
+            break; 
         
         case "Hardware":
             requiredTables = ["FireWall", "Switches"];
@@ -50,6 +63,17 @@ async function gatherData(selection){
                     // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
                 }
             }
+
+            requiredTables = ["PowerSupply"]; 
+            results.push(["Name", "Device Type", "quantity"]);
+            for (var i = 0; i < requiredTables.length; i++) {
+                const rr = await fetchData(requiredTables[i])
+                for (var y = 0; y < rr.length; y++){
+                    results.push(rr[y]);
+                    // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                }
+            }            
+
 
             break;
 
@@ -63,10 +87,42 @@ async function gatherData(selection){
                     // results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
                 }
             }
+
+            requiredTables = ["Audio"]; 
+            results.push(["Name", "Cable Type", "quantity"]);
+            for (var i = 0; i < requiredTables.length; i++) {
+                const rr = await fetchData(requiredTables[i])
+                for (var y = 0; y < rr.length; y++){
+                    results.push(rr[y]);
+                    // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                }
+            }
+
+            requiredTables = ["Visuals"]; 
+            results.push(["Name", "Cable Type", "quantity"]);
+            for (var i = 0; i < requiredTables.length; i++) {
+                const rr = await fetchData(requiredTables[i])
+                for (var y = 0; y < rr.length; y++){
+                    results.push(rr[y]);
+                    // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                }
+            }
+
             break;
+
         
         case "Other":
-            requiredTables = []        
+            requiredTables = ["Transaction"]  
+            results.push(["TimeStamp", "Name", "ItemID", "Table Origin", "Flow"]);
+            for (var i = 0; i < requiredTables.length; i++) {
+                const rr = await fetchData(requiredTables[i])
+                for (var y = 0; y < rr.length; y++){
+                    results.push(rr[y]);
+                    // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                }
+            } 
+            
+            break;
     }
 
     drawResults(results);
@@ -118,4 +174,29 @@ function drawResults(results){
         
     target.appendChild(table_wrapper);
 
+}
+
+function checkout() {
+    // POST request to /checkout
+    const selectedCategory = document.getElementById('category').value;
+    const subcategories = categoryToSubcategories[selectedCategory] || [];
+    const selectedSubcategories = [];
+
+    subcategories.forEach(subcategory => {
+    selectedSubcategories.push(document.getElementById(subcategory.key).value);
+});
+    console.log(selectedSubcategories);
+    fetch('http://localhost:3000/api/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+       body: JSON.stringify({
+        "sub":selectedSubcategories, 
+        "main": selectedCategory
+       })
+    })
+    .then(response => response.json())
+    .then(response => console.log(JSON.stringify(response)))
+    .catch(error => console.error(error))
 }

@@ -15,11 +15,15 @@
   <link rel="stylesheet" type="text/css" href="../styles/nav.css">
   <link rel="stylesheet" types="text/css" href="../styles/styles.css">
   <script src="../scripts/items.js"></script>
+
+  
 </head>
+
+
 <body>
   <div class="header">
     <div class="header-title">
-      Inventory
+      
     </div>
   </div>
   <div class="sidebar">
@@ -38,10 +42,7 @@
           <div class="icon-container">
             <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
           </div>
-          <h2 onclick="myFunction()" class="sidebar-link">Inventory</h2>
-          <div class="caret">
-            <img onclick="myFunction()" onclick="change()" id="sidebar-caret" src="/front-end/images/icons8-chevron-down-30.png">
-          </div>
+          <a href ="#" onclick="myFunction()" class="sidebar-link">Inventory</a>
         </div>
         <div id="myDropdown" class="dropdown-content">
           <a onClick = "gatherData('Cables')" >Cables</a>
@@ -52,35 +53,27 @@
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <a href="make-request.html">
-          <h2 class="sidebar-link">Make Request</h2>
-        </a>
+        <a href="makeRequest.html"class = "sidebar-link">Make a Request</a>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <h2 class="sidebar-link">My Profile</h2>
+        <a href="checkInOut.html" class = "sidebar-link">Check In/Out Item</a>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <h2 class="sidebar-link">Important Links</h2>
-      </div>
-      <div class="middle-sidebar-list">
-        <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
-        </div>
-        <h2 class="sidebar-link">Techhub Info</h2>
+        <a href="addItem.html"class = "sidebar-link">Add Item</a> <!-- Replace with the sidebar title -->
       </div>
     </div>
-  </div>
-
-  <div class="bottom-sidebar">
-    <div>Thomas Riesett</div>
+      
+    <div class="bottom-sidebar">
+      <div>Thomas Riesett</div>
+    </div>
   </div>
 
   <div class="main">
@@ -91,8 +84,8 @@
       </div>
     </div>
   </div>
-
-  <script src="/front-end/scripts/nav.js">
-  </script>
+  <script src="../scripts/nav.js"></script>
 </body>
+
+
 </html>

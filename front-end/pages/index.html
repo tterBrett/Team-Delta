@@ -13,73 +13,66 @@
 
   <link rel="stylesheet" type="text/css" href="/front-end/styles/nav.css">
   <link rel="stylesheet" href="../styles/styles.css">
-  <script href></script>
+  <script src="../scripts/items.js"></script>
+  <script src="../scripts/nav.js"></script>
+
 </head>
-<nav>
+<body>
   <div class="header">
     <div class="header-title">
-      Techhub
+      Check In/Out Item Form
     </div>
   </div>
   <div class="sidebar">
     <div class="top-sidebar">
-      <img class="towson-logo" src="/front-end/images/Towson logo.png">
+      <img class="towson-logo" src="../images/Towson logo.png">
     </div>
     <div class="middle-sidebar">
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <a href="index.html" class="sidebar-link">Home</h2></a>
+        <a href="index.html" class="sidebar-link">Home</a>
       </div>
       <div class="dropdown">
         <div class="middle-sidebar-list">
           <div class="icon-container">
             <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
           </div>
-          <h2 onclick="myFunction()" class="sidebar-link">Inventory</h2>
+          <a href ="#" onclick="myFunction()" class="sidebar-link">Inventory</a>
         </div>
         <div id="myDropdown" class="dropdown-content">
-          <a href="items.html" onClick = "gatherData('Cables')" >Cables</a>
-          <a href="items.html" onClick = "gatherData('Hardware')" href="items.html">Hardware</a>
-          <a href="items.html" onClick = "gatherData('Peripherals')" >Peripherals</a>
-          <a href="items.html" onClick = "gatherData('Other')" >Other</a>
+          <a onClick = "gatherData('Cables')" >Cables</a>
+          <a onClick = "gatherData('Hardware')" >Hardware</a>
+          <a onClick = "gatherData('Peripherals')" >Peripherals</a>
+          <a onClick = "gatherData('Other')" >Other</a>
         </div>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <a href="make-request.html">
-          <h2 class="sidebar-link">Make Request</h2>
-        </a>
+        <a href="makeRequest.html"class = "sidebar-link">Make a Request</a>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <h2 class="sidebar-link">My Profile</h2>
+        <a href="checkinout.html" class = "sidebar-link">Check In/Out Item</a>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <h2 class="sidebar-link">Important Links</h2>
-      </div>
-      <div class="middle-sidebar-list">
-        <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
-        </div>
-        <h2 class="sidebar-link">Techhub Info</h2>
+        <a href="addItem.html"class = "sidebar-link">Add Item</a> <!-- Replace with the sidebar title -->
       </div>
     </div>
+      
     <div class="bottom-sidebar">
       <div>Thomas Riesett</div>
     </div>
   </div>
-</nav>
 
-<body>
   <div id="content-home">
     <div id="img">
       <div id="cardover-lay">
@@ -110,21 +103,4 @@
     </div>
   </div>
 </body>
-<script src="/front-end/scripts/nav.js">
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
-
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
-    });
-  }
-</script>
-
 </html>

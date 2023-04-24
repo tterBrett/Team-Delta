@@ -1,4 +1,3 @@
-
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
@@ -17,45 +16,35 @@ for (i = 0; i < coll.length; i++) {
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-  document.getElementById("sidebar-caret").src = "/front-end/images/icons8-chevron-up-30.png";
-  
+function myFunction() { //This allows height change so it is possible for the animated transitions of the dropdown opening and closing.
+  const dropdownContent = document.getElementById("myDropdown");
+  if (dropdownContent.style.maxHeight === "0px" || dropdownContent.style.maxHeight === "") {
+    const totalHeight = Array.from(dropdownContent.children).reduce((sum, child) => sum + child.offsetHeight, 0);
+    dropdownContent.style.maxHeight = totalHeight + "px";
+  } else {
+    dropdownContent.style.maxHeight = "0px";
+  }
 }
+
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches(['.sidebar-link', '.sidebar-icon', '#sidebar-caret'])) {
-    let dropdowns = document.getElementsByClassName("dropdown-content");
-    let caret = document.getElementById("sidebar-caret").src = "/front-end/images/icons8-chevron-down-30.png";
-    for (let i = 0; i < dropdowns.length; i++) {
-      let openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  } 
-  
+window.onclick = function (event) {
+  if (!event.target.matches(['.sidebar-link', '.sidebar-icon', '.middle-sidebar-list'])) {
+    const dropdownContent = document.getElementById("myDropdown");
+    dropdownContent.style.maxHeight = "0px";
+  }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  const middleSidebarListItems = document.querySelectorAll(".middle-sidebar-list");
 
-/*
-let caret = document.getElementById("sidebar-caret");
+  middleSidebarListItems.forEach(item => {
+    item.addEventListener("mouseenter", function() {
+      this.classList.add("middle-sidebar-list-hover");
+    });
 
-caret.addEventListener("click", function() {
-  caret.textContent = "hello"
-  caret.innerHTML = "<img src='/front-end/images/icons8-chevron-up-30.png'/>";
-})
-*/
-let link = document.querySelector(".sidebar-link");
-
-link.addEventListener("click", function() {
-  link.textContent = "hello";
-})
-
-function change() {
-  document.getElementById("sidebar-caret").src = "/front-end/images/icons8-chevron-up-30.png";
-}
-
-
-
+    item.addEventListener("mouseleave", function() {
+      this.classList.remove("middle-sidebar-list-hover");
+    });
+  });
+});
