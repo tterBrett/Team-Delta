@@ -28,8 +28,35 @@ async function gatherData(selection){
     document.getElementsByClassName("header-title")[0].innerHTML = selection;
     // document.getElementById("content").innerHTML = selection;
     switch(selection){
+
+        case "MSE":
+        requiredTables = ["MSE"];
+        results.push(["brand", "quantity"]);
+        for (var i = 0; i < requiredTables.length; i++) {
+            const rr = await fetchData(requiredTables[i])
+            for (var y = 0; y < rr.length; y++){
+                results.push(rr[y]);
+                // results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
+            }
+        }
+
+        break;
+
+        case "KeyB": 
+        requiredTables = ["KeyB"];
+        results.push(["brand", "quantity"]);
+        for (var i = 0; i < requiredTables.length; i++) {
+            const rr = await fetchData(requiredTables[i])
+            for (var y = 0; y < rr.length; y++){
+                results.push(rr[y]);
+                // results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
+            }
+        }
+
+        break;
+            
         
-        case "Cables":
+        case "Ethernet":
             requiredTables = ["Ethernet"];
             results.push(["Is Long?", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
@@ -40,7 +67,9 @@ async function gatherData(selection){
                 }
             }
 
+            break; 
 
+            case "USB":
             requiredTables = ["USB"];
             results.push(["Name", "connector", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
@@ -53,8 +82,8 @@ async function gatherData(selection){
             
             break; 
         
-        case "Hardware":
-            requiredTables = ["FireWall", "Switches"];
+        case "FireWall":
+            requiredTables = ["FireWall"];
             results.push(["brand", "name", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
                 const rr = await fetchData(requiredTables[i])
@@ -64,6 +93,22 @@ async function gatherData(selection){
                 }
             }
 
+            break; 
+
+            case "Switches":
+                requiredTables = ["Switches"];
+                results.push(["brand", "name", "quantity"]);
+                for (var i = 0; i < requiredTables.length; i++) {
+                    const rr = await fetchData(requiredTables[i])
+                    for (var y = 0; y < rr.length; y++){
+                        results.push(rr[y]);
+                        // results.push((`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${rr[y]['name']}'s ${requiredTables[i]} available for checkout`))
+                    }
+                }
+
+            break; 
+            
+            case "PowerSupply":
             requiredTables = ["PowerSupply"]; 
             results.push(["Name", "Device Type", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
@@ -74,20 +119,9 @@ async function gatherData(selection){
                 }
             }            
 
-
             break;
 
-        case "Peripherals":
-            requiredTables = ["MSE", "KeyB"];
-            results.push(["brand", "quantity"]);
-            for (var i = 0; i < requiredTables.length; i++) {
-                const rr = await fetchData(requiredTables[i])
-                for (var y = 0; y < rr.length; y++){
-                    results.push(rr[y]);
-                    // results.push(`There are ${rr[y]['quantity']} ${rr[y]['brand']} ${requiredTables[i]} available for checkout`)
-                }
-            }
-
+            case "Audio":
             requiredTables = ["Audio"]; 
             results.push(["Name", "Cable Type", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
@@ -98,6 +132,9 @@ async function gatherData(selection){
                 }
             }
 
+            break;
+
+            case "Visual":
             requiredTables = ["Visuals"]; 
             results.push(["Name", "Cable Type", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
@@ -124,6 +161,7 @@ async function gatherData(selection){
             
             break;
     }
+
 
     drawResults(results);
 
