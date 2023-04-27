@@ -20,8 +20,8 @@ async function fetchData(selection){
     });
 
 }
-
-async function gatherData(selection){
+  
+  async function gatherData(selection) {
     let requiredTables = []
     let results = []
 
@@ -164,14 +164,21 @@ async function gatherData(selection){
 
 
     drawResults(results);
-
 }
+
 
 function drawResults(results){
     
-    // Wipping content clean if anything already exists
-    let target = document.getElementById("content");
+    // Wiping content clean if anything already exists
+    let target = document.getElementById("content") || document.getElementById("content-home") || document.getElementById("content-form");
+    
+    if (target.id !== "content") {
+        // If target div id is not 'content', set it to 'content' for styling purposes
+        target.id = "content";
+    }
+
     target.innerText = "";
+
 
     let table_wrapper = document.createElement("div");
     table_wrapper.classList.add("item-select-wrapper");

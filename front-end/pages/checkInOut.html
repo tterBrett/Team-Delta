@@ -2,7 +2,7 @@
 
 <head>
 
-    <title>Check In/Out</title>
+    <title>Check In/Out Form</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
 <body>
     <div class="header">
         <div class="header-title">
-          Check In/Out Item Form
+          Check In/Out Form
         </div>
       </div>
       <div class="sidebar">
@@ -34,39 +34,45 @@
             <div class="icon-container">
               <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
             </div>
-            <a href="index.html" class="sidebar-link">Home</a>
+            <a href="home.html" class="sidebar-link">Home</h2></a>
           </div>
           <div class="dropdown">
             <div class="middle-sidebar-list">
               <div class="icon-container">
-                <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
+                <img  class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
               </div>
               <a href ="#" onclick="myFunction()" class="sidebar-link">Inventory</a>
             </div>
             <div id="myDropdown" class="dropdown-content">
-              <a onClick = "gatherData('Cables')" >Cables</a>
-              <a onClick = "gatherData('Hardware')" >Hardware</a>
-              <a onClick = "gatherData('Peripherals')" >Peripherals</a>
+              <a onClick = "gatherData('MSE')" > Mouses</a>
+              <a onClick = "gatherData('KeyB')" > Keyboards</a>
+              <a onClick = "gatherData('PowerSupply')" > Power Supply</a>
+              <a onClick = "gatherData('USB')" > USB</a>
+              <a onClick = "gatherData('Ethernet')" > Ethernet Cables</a>
+              <a onClick = "gatherData('Visual')" > Visual Cables</a>
+              <a onClick = "gatherData('Switches')" > Switches</a>
+              <a onClick = "gatherData('FireWall')" > Firewalls</a>
+              <a onClick = "gatherData('Audio')" > Audio Cables</a>
               <a onClick = "gatherData('Other')" >Other</a>
             </div>
           </div>
           <div class="middle-sidebar-list">
             <div class="icon-container">
-              <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
+              <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
             </div>
             <a href="makeRequest.html"class = "sidebar-link">Make a Request</a>
           </div>
           <div class="middle-sidebar-list">
             <div class="icon-container">
-              <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
+              <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
             </div>
-            <a href="checkinout.html" class = "sidebar-link">Check In/Out Item</a>
+            <a href="checkInOut.html" class = "sidebar-link">Check In/Out Item</a>
           </div>
           <div class="middle-sidebar-list">
             <div class="icon-container">
-              <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
+              <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
             </div>
-            <a href="addItem.html"class = "sidebar-link">Add Item</a> <!-- Replace with the sidebar title -->
+            <a href="addItem.html" class = "sidebar-link">Add Item</a> <!-- Replace with the sidebar title -->
           </div>
         </div>
           
@@ -76,7 +82,7 @@
       </div>
     
       <div class="main">
-        <div id="content">
+        <div id="content-form">
             <form id="mainForm">
                 <label for="category">Select an Item:</label>
                 <select id="category" onchange="populateSubcategories();">

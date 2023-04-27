@@ -4,8 +4,6 @@ const express = require("express")
 const app = express()
 const mysql = require('mysql') // Required to connect to mysql
 const cors = require('cors')
-const util = require('util');
-
 
 // Database variables stored in .env file
 const port = 3000;
@@ -148,32 +146,22 @@ app.get("/api/tables/:table", (req, res) => {
 
 })
 
-app.post('/api/checkout', async (req, res) => {
-
-    const query = util.promisify(connection.query).bind(connection);
-
-   console.log("pre query", req.body)
-   const table_name = (req.body.main).toLowerCase();
-
-   (async () => {
-    try {
-      const rows = await query(`
-        SELECT unique_ID
-        FROM inventory.${table_name}
-        WHERE brand = 'Dell'
-        limit 1;`
-      );
-
-      const sdfdsf = await query(`
-
-      `)
-      console.log(rows[0]['unique_ID']);
-    } finally {
-      connection.end();
-    }
-  })()
-
-});
+app.post('/api/checkout', (req, res) => {
+   console.log(req.body.sub)
+    // connection.query(
+    //     `UPDATE Inventory.${req.body.main}
+    //     SET checked_Out = '1'
+    //     WHERE checked_Out = 0;`
+    // , (error, results) => {
+    //     if (error) {
+    //         console.error(error)
+    //         res.status(500).send('Error updating data in database');
+    //     } else {
+    //         res.status(200).send('Data updated in database');
+    //     }
+    // });
+  });
+  
 
 app.get("/api/home", (req, res) => {
     res.send("this is the body. you made it home");

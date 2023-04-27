@@ -2,7 +2,7 @@
 
 <head>
 
-    <title>Add Item Form</title>
+    <title>TechHub Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 <body>
     <div class="header">
         <div class="header-title">
-          Add Item Form
+          TechHub Home
         </div>
       </div>
       <div class="sidebar">
@@ -67,7 +67,7 @@
             <div class="icon-container">
               <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
             </div>
-            <a href="checkInOut.html" class = "sidebar-link">Check In/Out Item</a>
+            <a href="checkinout.html" class = "sidebar-link">Check In/Out Item</a>
           </div>
           <div class="middle-sidebar-list">
             <div class="icon-container">
@@ -81,61 +81,36 @@
           <div>Thomas Riesett</div>
         </div>
       </div>
-    
-      <div class="main">
-        <div id="content-form">
-          <form id="mainForm" onsubmit="handleSubmit(event)">
-              <label for="category">Select an Item:</label>
-              <select id="category" onchange="populateSubcategories();">
-                  <option value="">Select a category</option>
-                  <option value="MSE">Mouse</option>
-                  <option value="PowerSupply">Power Supply</option>
-                  <option value="Firewall">Firewall</option>
-                  <option value="Audio">Audio</option>
-                  <option value="Switches">Switch</option>
-                  <option value="Visuals">Visual</option>
-                  <option value="Ethernet">Ethernet</option>
-                  <option value="USB">USB</option>
-                  <option value="KeyB">Keyboard</option>
-              </select>
-              <div id="subcategories" class="hidden">
-              </div>
-              <br>
-              <button id="addItem" class = "form-button" onclick="addItem('add')" disabled>Add Item</button>                   
-              <button type="button"id="resetButton" class ="form-button"onclick="resetModal()">Reset</button>
-          </form>
+
+  <div id="content-home">
+    <div id="img">
+      <div id="cardover-lay">
+        <div id="textcontainer">
+          <h2 id="text1">Welcome to</h2>
+          <h2 id="text2">
+            Towson University
+          </h2>
+          <h2 id="text3">
+            Techhub
+          </h2>
         </div>
       </div>
-
-        <div id="confirmationModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="modal-header-title">Check In/Out</span>
-                <div class="close-btn-wrapper">
-                    <button onclick="closeConfModal()" type="button">&times;</button>
-                </div>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <p id="confModalMessage"></p>
-                        <button type="button" id="yesButton">Yes</button>
-                        <button type="button" id="noButton">No</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    <div id="successModal" class="modal">
-        <div class ="modal-content">
-            <div class="modal-header">
-                <span class="modal-header-title">Add Item</span>
-            </div>
-            <div class="modal-body">
-                <p id= "succModalMessage"></p>
-                <button type = "button" id="ok" onclick = "closeSuccModal()">Ok</button>
-            </div>
-        </div>
     </div>
-
+    <div id="links">
+      <div id="box">
+        hello
+      </div>
+      <div id="box">
+        hello
+      </div>
+      <div id="box">
+        hello
+      </div>
+      <div id="box">
+        hello
+      </div>
+    </div>
+  </div>
+  <script src="../scripts/nav.js"></script>
 </body>
 </html>
