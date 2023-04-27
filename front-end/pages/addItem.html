@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Make a Request Form</title>
+  <title>Add Item Form</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,12 +12,12 @@
   <link rel="stylesheet" href="../styles/styles.css">
   <script src="../scripts/nav.js"></script>
   <!-- <script src="../scripts/items.js"></script> -->
-  <script src="../scripts/makeRequest.js"></script>
+  <script src="../scripts/addItem.js"></script>
 </head>
 
 <body>
   <div class="header">
-    <div class="header-title"> Make a Request Form </div>
+    <div class="header-title"> Add Item Form </div>
   </div>
   <div class="sidebar">
     <div class="top-sidebar">
@@ -28,7 +28,7 @@
         <div class="icon-container">
           <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
         </div>
-        <a href="Home.html" class="sidebar-link">Home </h2>
+        <a href="home.html" class="sidebar-link">Home </h2>
         </a>
       </div>
       <div class="dropdown">
@@ -36,7 +36,7 @@
           <div class="icon-container">
             <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
           </div>
-          <a onclick="myFunction()" class="sidebar-link">Inventory</a>
+          <a href="#" onclick="myFunction()" class="sidebar-link">Inventory</a>
         </div>
         <div id="myDropdown" class="dropdown-content">
           <a href="items.html#MSE"> Mouses</a>
@@ -77,14 +77,14 @@
   </div>
 
   <div class="main">
-    <form id="mainForm" onsubmit = "handleSubmit(event)">
+    <form id="mainForm" onsubmit="handleSubmit(event)">
       <img class="mainForm-header-img" src="../images/Towson logo.png">
       <div class="mainForm-header">
-        <span class="mainForm-header-title">Make a Request</span>
+        <span class="mainForm-header-title">Add Item</span>
       </div>
       <div id="content-form">
         <label for="item">Select an Item:</label>
-        <select id="item" onchange="populateAttributes();">
+        <select id="item" onchange="populateAttributes()">
           <option value="">Select an Item</option>
           <option value="MSE">Mouse</option>
           <option value="PowerSupply">Power Supply</option>
@@ -98,15 +98,15 @@
         </select>
         <div id="attributes" class="hidden"></div>
         <br>
-        <button id="reqBtn" class="form-button" onclick="reqItem('req')" disabled>Submit Request</button>
+        <button id="addItemBtn" class="form-button" onclick="addItem('add')" disabled>Add Item</button>
         <button type="button" id="resetButton" class="form-button" onclick="resetModal()">Reset</button>
     </form>
-  </div>]
+  </div>
 
   <div id="confirmationModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <span class="modal-header-title">Make a Request</span>
+        <span class="modal-header-title">Add Item</span>
         <div class="close-btn-wrapper">
           <button onclick="closeConfModal()" type="button">&times;</button>
         </div>
@@ -124,7 +124,7 @@
   <div id="successModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <span class="modal-header-title">Make a Request</span>
+        <span class="modal-header-title">Add Item</span>
       </div>
       <div class="modal-body">
         <p id="succModalMessage"></p>
