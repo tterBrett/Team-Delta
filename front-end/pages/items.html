@@ -14,7 +14,6 @@
 
   <link rel="stylesheet" type="text/css" href="../styles/nav.css">
   <link rel="stylesheet" types="text/css" href="../styles/styles.css">
-  <script src="../scripts/items.js"></script>
 </head>
 <body>
   <div class="header">
@@ -23,20 +22,22 @@
     </div>
   </div>
   <div class="sidebar">
-    <div class="top-sidebar">
-      <img class="towson-logo" src="../images/Towson logo.png">
-    </div>
+    <a href="index.html">
+      <div class="top-sidebar">
+        <img class="towson-logo" src="../images/Towson logo.png">
+      </div>
+    </a>
     <div class="middle-sidebar">
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
+          <img class="sidebar-icon" src="/front-end/images/icons8-home-48.png">
         </div>
         <a href="index.html" class="sidebar-link">Home</h2></a>
       </div>
       <div class="dropdown">
         <div class="middle-sidebar-list">
           <div class="icon-container">
-            <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-30.png">
+            <img onclick="myFunction()" class="sidebar-icon" src="/front-end/images/icons8-in-inventory-49.png">
           </div>
           <h2 onclick="myFunction()" class="sidebar-link">Inventory</h2>
           <div class="caret">
@@ -44,15 +45,21 @@
           </div>
         </div>
         <div id="myDropdown" class="dropdown-content">
-          <a onClick = "gatherData('Cables')" >Cables</a>
-          <a onClick = "gatherData('Hardware')" >Hardware</a>
-          <a onClick = "gatherData('Peripherals')" >Peripherals</a>
+          <a onClick = "gatherData('MSE')" > Mouses</a>
+          <a onClick = "gatherData('KeyB')" > Keyboards</a>
+          <a onClick = "gatherData('PowerSupply')" > Power Supply</a>
+          <a onClick = "gatherData('USB')" > USB</a>
+          <a onClick = "gatherData('Ethernet')" > Ethernet Cables</a>
+          <a onClick = "gatherData('Visual')" > Visual Cables</a>
+          <a onClick = "gatherData('Switches')" > Switches</a>
+          <a onClick = "gatherData('FireWall')" > Firewalls</a>
+          <a onClick = "gatherData('Audio')" > Audio Cables</a>
           <a onClick = "gatherData('Other')" >Other</a>
         </div>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img class="sidebar-icon" src="/front-end/images/icons8-data-transfer-48.png">
         </div>
         <a href="make-request.html">
           <h2 class="sidebar-link">Make Request</h2>
@@ -60,29 +67,22 @@
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img class="sidebar-icon" src="/front-end/images/icons8-check-all-48.png">
         </div>
-        <h2 class="sidebar-link">My Profile</h2>
+        <a href="checkInOut.html">
+          <h2 class="sidebar-link">Check In/Out Item</h2>
+        </a>
       </div>
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
+          <img class="sidebar-icon" src="/front-end/images/icons8-add-48.png">
         </div>
-        <h2 class="sidebar-link">Important Links</h2>
-      </div>
-      <div class="middle-sidebar-list">
-        <div class="icon-container">
-          <img class="sidebar-icon" src="/front-end/images/icons8-in-inventory-30.png">
-        </div>
-        <h2 class="sidebar-link">Techhub Info</h2>
+        <a href="addItem.html">
+          <h2 class="sidebar-link">Add Item</h2>
+        </a>
       </div>
     </div>
   </div>
-
-  <div class="bottom-sidebar">
-    <div>Thomas Riesett</div>
-  </div>
-
   <div class="main">
     <div id="content">
       If you are seeing this, the item tables did not load properly
@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <script src="/front-end/scripts/nav.js">
-  </script>
+  <script src="/front-end/scripts/nav.js"></script>
+  <script src="/front-end/scripts/items.js"></script>
 </body>
 </html>
