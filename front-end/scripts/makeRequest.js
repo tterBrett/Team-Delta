@@ -143,7 +143,7 @@ function populateAttributes() {
 
     const emptyOption = document.createElement('option');
     emptyOption.setAttribute('value', '');
-    emptyOption.innerText = 'Select ' + attribute.label;
+    emptyOption.innerText = 'Select a ' + attribute.label;
     select.appendChild(emptyOption);
 
     // Check if the options are an object or an array
@@ -176,6 +176,10 @@ function populateAttributes() {
 
       // Show the label for the dependent attribute if it is hidden and the parent attribute has a value
       dependentLabel.classList.toggle('hidden', !selectedValue);
+
+      //Make sure dependent option has Select a ___ instead of Select ____
+      const dependentEmptyOption = dependentAttribute.querySelector('option[value=""]');
+      dependentEmptyOption.innerText = selectedValue ? 'Select a ' + attribute.label : 'Select ' + attribute.label;
     });
   }
 });
@@ -188,7 +192,7 @@ function validateForm() {
 const reqBtn = document.getElementById('reqBtn');
 
 const itemElement = document.getElementById('item');
-const areSelectsValid = [document.getElementById('attributes').getElementsByTagName('select')].every(select => select.value !== '');
+const areSelectsValid = [...document.getElementById('attributes').getElementsByTagName('select')].every(select => select.value !== '');
 const areItemsValid = itemElement.value != '';
 
 const isValid = areSelectsValid && areItemsValid;  

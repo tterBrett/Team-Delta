@@ -74,7 +74,7 @@ async function fetchData(selection){
         
         case "Ethernet":
             requiredTables = ["Ethernet"];
-            results.push(["Is Long?", "quantity"]);
+            results.push(["Length", "quantity"]);
             for (var i = 0; i < requiredTables.length; i++) {
                 const rr = await fetchData(requiredTables[i])
                 for (var y = 0; y < rr.length; y++){
@@ -247,7 +247,7 @@ function drawResults(results){
     // Setting the table headers
     table_headers.forEach(header => {
         let headerItem = document.createElement("th")
-        headerItem.innerText = header
+        headerItem.innerText = header.charAt(0).toUpperCase() + header.slice(1);
         table_head_row.appendChild(headerItem);
     });
 
