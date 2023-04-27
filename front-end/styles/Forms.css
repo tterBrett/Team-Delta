@@ -1,14 +1,82 @@
 #mainForm {
   display: inline-block;
-  background-color: rgb(231,231,231);
-  padding: 200px;
+  background-color: rgb(71, 71, 71);
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgb(0, 0, 0);
-}
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-left: 100px;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+  }
 
 #mainForm label {
   font-size: 20px;
+  color: black;
 }
+
+.mainForm-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: rgb(71, 71, 71);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:8px 20px;
+  }
+  
+.mainForm-header-title {
+font-size: 25px;
+color: white;
+}
+
+.mainForm-header-img {
+  margin-left: 72%;
+  z-index: 2;
+  position: relative;
+  padding: 8px 20px;
+}
+
+
+
+#content-form {
+  position: relative;
+  text-align: center;
+  padding: 200px 200px;
+  padding-top: 150px;
+  background-color: rgb(231,231,231);
+}
+
+
+.form-button {
+  cursor:pointer;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: rgb(71, 71, 71);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  border-radius: 4px; 
+  justify-content: space-between;
+}
+
+.form-button:hover {
+  background-color: rgba(0, 0, 0, 0.459);
+}
+
+.form-button:disabled {
+  background-color: rgba(71, 71, 71, 0.5);
+  cursor:default;
+}
+
 
 select {
   font-size: 15px;
@@ -57,31 +125,6 @@ select:focus {
   color: white;
 }
 
-.form-button {
-  cursor:pointer;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  background-color: rgb(71, 71, 71);
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  border-radius: 4px; 
-  justify-content: space-between;
-}
-
-.form-button:hover {
-  background-color: rgba(0, 0, 0, 0.459);
-}
-
-.form-button:disabled {
-  background-color: rgba(71, 71, 71, 0.5);
-  cursor:default;
-}
-
 .modal-content {
   font-family: 'IBM Plex Sans', sans-serif;
   position: relative;
@@ -94,7 +137,7 @@ select:focus {
   display: flex;
   flex-direction: column;
   text-align: center;
-  left: 8%;
+  left: 5%;
 }
 
 .modal-body {
