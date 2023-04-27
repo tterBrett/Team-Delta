@@ -4,6 +4,8 @@ const express = require("express")
 const app = express()
 const mysql = require('mysql') // Required to connect to mysql
 const cors = require('cors')
+const util = require('util');
+
 
 // Database variables stored in .env file
 const port = 3000;
@@ -20,7 +22,9 @@ app.use(express.json()); // Parses incoming JSON payloads
 const connection = mysql.createConnection({
     host: DB_HOST,
     user: DB_USER,
-    password: DB_PASSWORD
+    password: DB_PASSWORD,
+    multipleStatements: true
+
 })
 
 // get routes
@@ -146,22 +150,43 @@ app.get("/api/tables/:table", (req, res) => {
 
 })
 
-app.post('/api/checkout', (req, res) => {
-   console.log(req.body.sub)
-    // connection.query(
-    //     `UPDATE Inventory.${req.body.main}
-    //     SET checked_Out = '1'
-    //     WHERE checked_Out = 0;`
-    // , (error, results) => {
-    //     if (error) {
-    //         console.error(error)
-    //         res.status(500).send('Error updating data in database');
-    //     } else {
-    //         res.status(200).send('Data updated in database');
-    //     }
-    // });
-  });
-  
+// https://stackoverflow.com/questions/44004418/node-js-async-await-using-with-mysql
+app.post('/api/checkout', async (req, res) => {
+
+    const query = util.promisify(connection.query).bind(connection);
+
+    let i = 1
+    let whereClause = ""
+
+    let action = true ? req.body.action == 'in' : false
+
+    for (const [key, value] of Object.entries(req.body.wheres)) {
+        if(i == 1){
+            whereClause = `WHERE ${key} = '${value}' ` 
+        }else{
+            whereClause += `AND ${key} = '${value}'`
+        }
+        i++;
+    }
+    
+    const sql = `SELECT unique_ID FROM inventory.${req.body.table} ${whereClause} AND checked_Out = ${action} LIMIT 1;`;
+    console.log(sql);
+
+    (async () => {
+    try {
+      const rows = await query(sql);
+
+        console.log("product", rows[0]['unique_ID']);
+        let updateQuery = `UPDATE inventory.${req.body.table} SET checked_Out = ${!action} ${whereClause} AND unique_ID = '${rows[0]['unique_ID']}'`
+        console.log("UPDATE SQL", updateQuery)
+        const updatedStatus = await query(updateQuery)
+        console.log("WOOP WOOP", updatedStatus);
+    } catch(err){
+        console.log("ERROR\n", err)
+    }
+  })()
+
+});
 
 app.get("/api/home", (req, res) => {
     res.send("this is the body. you made it home");
