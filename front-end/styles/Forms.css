@@ -24,8 +24,8 @@
   height: 50px;
   background-color: rgb(71, 71, 71);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   padding:8px 20px;
   }
   
@@ -35,8 +35,9 @@ color: white;
 }
 
 .mainForm-header-img {
-  margin-left: 72%;
+  margin-left: 33%;
   z-index: 2;
+  justify-content: center;
   position: relative;
   padding: 8px 20px;
 }
