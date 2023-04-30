@@ -194,8 +194,8 @@ app.post('/api/checkout', async (req, res) => {
     })()
 
 })
-// localhost:3000/api/addItem
-app.post('/api/addItem'), async (req, res) => {
+
+app.get("/api/addItem"), async (req, res) => {
     console.log("endpoint hit")
     const query = util.promisify(connection.query).bind(connection);
 
