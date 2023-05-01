@@ -55,7 +55,19 @@ const itemAndAttributes = {
       {
           key: 'cable_type',
           label: 'Type',
-          options: ['mic','con','aux']
+          options: ['mic','con','aux', 'misc']
+      },
+      {
+          key: 'name',
+          label: 'Name',
+          options: {
+            mic: ['iRigMic','3RingExt','AWMCable','SmallMic'],
+            con: ['RWYCables','rc59/uCable'],
+            aux: ['AppleHeadJack','RWAuxSplit','USBctoAuxSplitter','AppleHeadJack','YellowWhiteSplit','BerkelinTable','LabtecAux','MaleToFemale','GreenRedAux',
+                  'BelkinStereoExt','3.5mmStereoCable','AuxSplitter','HeadsetAuxSplit',],
+            misc: ['RYWHeadExt','3AWMCable','USBCtoAudioJack','BerlinSplitter','GreenRedSplitter','WoodedVoipAdapt','HeadsetAdapt']
+          },
+          dependentOn: 'cable_type'
       }
   ],
   Switches: [

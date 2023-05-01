@@ -1,6 +1,5 @@
-
-CREATE DATABASE if not exists Inventory;
-use Inventory;
+CREATE DATABASE if not exists Inventory; 
+use Inventory; 
 -- Current Inventory and Cataloging as of the Spring of 2023 semester:
 -- Amount of items in commented tags listed may change for future additions and removals of devices.
 
@@ -525,9 +524,9 @@ INSERT INTO Visuals VALUES ('0106', 'display', 'DisplayPort', 0);
 INSERT INTO Visuals VALUES ('0107', 'display', 'DisplayPort', 0);
 
 -- 3 Display Port to HDMI:
-INSERT INTO Visuals VALUES ('0108', 'display', 'DisiplaytoHDMI', 0);
-INSERT INTO Visuals VALUES ('0109', 'display', 'DisiplaytoHDMI', 0);
-INSERT INTO Visuals VALUES ('0110', 'display', 'DisiplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0108', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0109', 'display', 'DisplaytoHDMI', 0);
+INSERT INTO Visuals VALUES ('0110', 'display', 'DisplaytoHDMI', 0);
 
 -- 3 Display to DVI:
 INSERT INTO Visuals VALUES ('0111', 'display', 'DisplaytoDVI', 0);
@@ -760,7 +759,7 @@ CREATE TABLE FireWall
 INSERT INTO FireWall VALUES ('0001', 'Cisco', 'pix501', 0);
 INSERT INTO FireWall VALUES ('0002', 'Cisco', 'pix515e', 0);
 
---
+-- 2 Cisco FireWalls
 
 DROP TABLE IF EXISTS  Switches;
 
@@ -923,6 +922,18 @@ INSERT INTO USB VALUES ('0069', 'usbc', 'USBCtoUSBC', 0);
 
 -- 1 USBC to USBB: 
 INSERT INTO USB VALUES ('0070', 'usbc', 'USBCtoUSBB', 0);
+
+
+DROP TABLE IF EXISTS Transaction;
+
+CREATE TABLE Transaction
+(
+	timeStamp varchar(30) PRIMARY KEY,
+    name varchar(20),
+	itemID varchar(4), 
+    tableOrigin varchar(20),
+    flow bit
+    );
 
 -- Potentially add in name descriptions but search in the query by the varchars.
 
