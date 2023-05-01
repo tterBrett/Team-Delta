@@ -4,6 +4,8 @@ const express = require("express")
 const app = express()
 const mysql = require('mysql') // Required to connect to mysql
 const cors = require('cors')
+const util = require('util');
+
 
 // Database variables stored in .env file
 const port = 3000;
@@ -20,7 +22,9 @@ app.use(express.json()); // Parses incoming JSON payloads
 const connection = mysql.createConnection({
     host: DB_HOST,
     user: DB_USER,
-    password: DB_PASSWORD
+    password: DB_PASSWORD,
+    multipleStatements: true
+
 })
 
 // get routes
@@ -30,65 +34,50 @@ app.get("/",  (req, res) => {
 
 // example
 app.get("/api/tables/:table", (req, res) => {
-    console.log("Fetching table:", req.params.table);
-    
-    if(["MSE"].includes(req.params.table)){
-
-        connection.query(`
-            select distinct brand, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_Out
-            group by brand;`,
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }
-
-    else if (["KeyB"].includes(req.params.table)) {
+    let i = 1
+    selectClause = ""
+    groupByClause = "GROUP BY "
+    tables = {
+        "MSE": ["brand"],
+        "KeyB": ["brand"],
+        "USB": ["name", "connector"],
+        "Audio": ["name", "cable_type"],
+        "PowerSupply": ["name", "device_type"],
+        "Visuals": ["name", "cable_type"],
+        "Switches": ["brand", "name"],
+        "FireWall":["brand", "name"],
         
-        connection.query(`
-            select distinct brand, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_Out
-            group by brand;`, 
-        (err, rows, fields) => {
+    }
+    query = "SELECT distinct "
+    if(Object.keys(tables).includes(req.params.table)){
+        for (const x of (tables[`${req.params.table}`])) {
+            if(i == 1){
+                selectClause += x
+                groupByClause += x
+            }else{
+                selectClause += "," + x
+                groupByClause += "," + x
+            }
+            i++;
+        }
+        selectClause += ", count(unique_ID) as quantity"
+        sql = query + selectClause + ` FROM inventory.${req.params.table} WHERE not checked_out ${groupByClause};`
+
+        connection.query(`${sql}`, (err, rows, fields) => {
+            console.log(err)
             res.json(rows)
         });
     }
-
-    else if(["USB"].includes(req.params.table)){
-
-        connection.query(`
-            select distinct name, connector, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_out
-            group by name, connector;`,
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }
-
-    else if(["Audio"].includes(req.params.table)){
-       
-        connection.query(`
-            select distinct name, cable_type, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_out
-            group by name, cable_type;`,
-        
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }
-
     else if(["Ethernet"].includes(req.params.table)){
        
         connection.query(`
         select distinct 
 		    CASE 
-		    WHEN is_Long = 0 THEN 'Short'
-            ELSE 'Long' 
-	        END AS CableLength,
+             WHEN
+                 is_Long = 0 THEN 'Short'
+             ELSE 
+                 'Long' 
+	     END AS CableLength,
 		    count(unique_ID) as quantity
         from Inventory.${req.params.table}
         where not checked_out
@@ -98,64 +87,114 @@ app.get("/api/tables/:table", (req, res) => {
             res.json(rows)
         });
     }
-
-    else if(["PowerSupply"].includes(req.params.table)){
-       
-        connection.query(`
-            select distinct name, device_type, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_out
-            group by name, device_type;`,
-        
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }
-
-    else if(["Visuals"].includes(req.params.table)){
-       
-        connection.query(`
-            select distinct name, cable_type, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_out
-            group by name, cable_type;`,
-        
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }    
-
-    else if(["Transaction"].includes(req.params.table)){
-       
-        connection.query(`
-        select distinct 
-	        CASE 
-            WHEN flow = 0 THEN 'Checked In' 
-            ELSE 'Checked Out'
-            END AS Flow, 
-            timeStamp, name, itemID, tableOrigin    
-        from Inventory.${req.params.table}
-            group by name;`,
-        
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }    
-
     else{
-        connection.query(`
-            select distinct brand, name, count(unique_ID) as quantity
-            from Inventory.${req.params.table}
-            where not checked_out
-            group by brand, name;`,
-        (err, rows, fields) => {
-            console.log(err);
-            res.json(rows)
-        });
+        res.send("Table does not exist");
     }
     
     // res.send(`Loading table ${req.params.table}`);
 
+})
+
+// https://stackoverflow.com/questions/44004418/node-js-async-await-using-with-mysql
+app.post('/api/checkout', async (req, res) => {
+
+    const query = util.promisify(connection.query).bind(connection);
+
+    let i = 1
+    let whereClause = ""
+
+    let action = true ? req.body.action == 'in' : false
+    console.log("Wheres: ", req.body.wheres)
+    if(req.body.table == 'Ethernet'){
+        if(req.body.wheres.is_Long == 'Long'){
+            req.body.wheres.is_Long = 1;
+        }else{
+            req.body.wheres.is_Long = 0;
+        }
+    }
+
+    for (const [key, value] of Object.entries(req.body.wheres)) {
+        if(i == 1){
+            whereClause = `WHERE ${key} = '${value}' ` 
+        }else{
+            whereClause += `AND ${key} = '${value}'`
+        }
+        i++;
+    }
+    
+    const sql = `SELECT unique_ID FROM inventory.${req.body.table} ${whereClause} AND checked_Out = ${action} LIMIT 1;`;
+    console.log("selection", sql);
+
+    (async () => {
+        try {
+            const rows = await query(sql);
+            if(rows.length > 0){
+                let updateQuery = `UPDATE inventory.${req.body.table} SET checked_Out = ${!action} ${whereClause} AND unique_ID = '${rows[0]['unique_ID']}'`
+                const updatedStatus = await query(updateQuery)
+                if(updatedStatus['changedRows'] == 1){
+                    console.log("transaction was succesful")
+                }else{
+                    console.log("The transaction did not sucessfully go through. Please try again.")
+                }
+            }
+            else{
+                console.log("Unable to process transaction. Insuffecient quantiy for this action.")
+            }
+            
+        } catch(err){
+            console.log("ERROR\n", err)
+        }
+    })()
+
+})
+// localhost:3000/api/addItem
+app.post('/api/addItem', async (req, res) => {
+    console.log("endpoint hit")
+    const query = util.promisify(connection.query).bind(connection);
+
+    let i = 1
+    let whereClause = ""
+    let insertClause = ""
+
+    for (const [key, value] of Object.entries(req.body.wheres)) {
+        if(i == 1){
+            whereClause = `WHERE ${key} = '${value}' ` 
+            insertClause = `'${value}'`
+        }else{
+            whereClause += `AND ${key} = '${value}'`
+            insertClause += `,'${value}'`
+        }
+        i = i + 1;
+    }
+
+    const sql = `SELECT MAX(unique_ID) FROM inventory.${req.body.table}`;
+    console.log("selection", sql);
+
+    (async () => {
+        try {
+            const rows = await query(sql);
+            if(rows.length > 0){
+                // INSERT INTO MSE VALUES ('0011', 'Dell', 0); 
+                console.log(rows);
+                newId = parseFloat(rows[0]['MAX(unique_ID)']) + 1
+                insertClause = `(${newId}, ${insertClause}, 0)`
+                let insertQuery = `INSERT INTO inventory.${req.body.table} VALUES ${insertClause}`
+                console.log("insert statement:", insertQuery)
+                const insertStatus = await query(insertQuery)
+                if(insertStatus['affectedRows'] == 1){
+                    console.log("transaction was succesful")
+                }else{
+                    console.log("The transaction did not sucessfully go through. Please try again.")
+                }
+            }
+            else{
+                console.log("Unable to process transaction. Insuffecient quantiy for this action.")
+            }
+            
+        } catch(err){
+            console.log("ERROR\n", err)
+        }
+    })()
 })
 
 app.get("/api/home", (req, res) => {

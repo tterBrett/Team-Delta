@@ -1,8 +1,8 @@
-const categoryToSubcategories = {
+const itemAndAttributes = {
   //**FUTURE PROJECT**
   //  If Kyle adds a new item, for example a new firewall with a different brand and name,
   //  it will add the item to the database, but not to the dropdown menus here. A project is to 
-  //  make it so kyle can select other for any subcategory, and then enter the name himself to match the database to checkout or checkin.
+  //  make it so kyle can select other for any attribute, and then enter the name himself to match the database to checkout or checkin.
   MSE: [
       {
           key: 'brand',
@@ -124,42 +124,34 @@ const categoryToSubcategories = {
   ]
 };
 
-function populateSubcategories() {
+function populateAttributes() {
 
-  const category = document.getElementById('category').value;
-  const subcategories = categoryToSubcategories[category] || [];
-  const subcategoriesDiv = document.getElementById('subcategories');
-  subcategoriesDiv.innerHTML = '';
-  const categoryElement = document.getElementById('category');
-  categoryElement.addEventListener('change', () => {
-    if (categoryElement.value === '') {
-      const checkIn = document.getElementById('checkIn');
-      const checkOut = document.getElementById('checkOut');
-      checkIn.disabled = checkOut.disabled = true;
-    }
-  });
-  subcategories.forEach(subcategory => {
+  const item = document.getElementById('item').value;
+  const attributes = itemAndAttributes[item] || [];
+  const attributesDiv = document.getElementById('attributes');
+  attributesDiv.innerHTML = '';
+  attributes.forEach(attribute => {
     const label = document.createElement('label');
-    label.setAttribute('for', subcategory.key);
-    label.innerText = subcategory.label + ':';
-    subcategoriesDiv.appendChild(label);
+    label.setAttribute('for', attribute.key);
+    label.innerText = attribute.label + ':';
+    attributesDiv.appendChild(label);
 
     const select = document.createElement('select');
-    select.setAttribute('id', subcategory.key);
-    select.setAttribute('name', subcategory.key);
+    select.setAttribute('id', attribute.key);
+    select.setAttribute('name', attribute.key);
 
     select.addEventListener('change', () => {
       validateForm();
-      updateDependentOptions(subcategory.key);
+      updateDependentOptions(attribute.key);
     });
 
     const emptyOption = document.createElement('option');
     emptyOption.setAttribute('value', '');
-    emptyOption.innerText = 'Select ' + subcategory.label;
+    emptyOption.innerText = 'Select a ' + attribute.label;
     select.appendChild(emptyOption);
 
     // Check if the options are an object or an array
-    const optionsArray = Array.isArray(subcategory.options) ? subcategory.options : Object.values(subcategory.options);
+    const optionsArray = Array.isArray(attribute.options) ? attribute.options : Object.values(attribute.options);
 
     optionsArray.forEach(optionValue => {
       const option = document.createElement('option');
@@ -168,26 +160,30 @@ function populateSubcategories() {
       select.appendChild(option);
     });
 
-    subcategoriesDiv.appendChild(select);
-    subcategoriesDiv.appendChild(document.createElement('br'));
-    subcategoriesDiv.classList.toggle('hidden', !category);
+    attributesDiv.appendChild(select);
+    attributesDiv.appendChild(document.createElement('br'));
+    attributesDiv.classList.toggle('hidden', !item);
 
 
-  if (subcategory.dependentOn) {
-    // Hide the dependent subcategory until the subcategory it depends on has a value
-    const dependentSubcategory = document.getElementById(subcategory.key);
-    const dependentLabel = subcategoriesDiv.querySelector(`label[for="${subcategory.key}"]`);
+  if (attribute.dependentOn) {
+    // Hide the dependent attribute until the attribute it depends on has a value
+    const dependentAttribute = document.getElementById(attribute.key);
+    const dependentLabel = attributesDiv.querySelector(`label[for="${attribute.key}"]`);
     dependentLabel.classList.toggle('hidden', true);
-    dependentSubcategory.classList.toggle('hidden', true);
+    dependentAttribute.classList.toggle('hidden', true);
 
-    // Add event listener to the subcategory it depends on
-    const dependentOnSubcategory = document.getElementById(subcategory.dependentOn);
-    dependentOnSubcategory.addEventListener('change', () => {
-      const selectedValue = dependentOnSubcategory.value;
-      dependentSubcategory.classList.toggle('hidden', !selectedValue);
+    // Add event listener to the attribute it depends on
+    const dependentOnAttribute = document.getElementById(attribute.dependentOn);
+    dependentOnAttribute.addEventListener('change', () => {
+      const selectedValue = dependentOnAttribute.value;
+      dependentAttribute.classList.toggle('hidden', !selectedValue);
 
-      // Show the label for the dependent subcategory if it is hidden and the parent subcategory has a value
+      // Show the label for the dependent attribute if it is hidden and the parent attribute has a value
       dependentLabel.classList.toggle('hidden', !selectedValue);
+
+      //Make sure dependent option has Select a ___ instead of Select ____
+      const dependentEmptyOption = dependentAttribute.querySelector('option[value=""]');
+      dependentEmptyOption.innerText = selectedValue ? 'Select a ' + attribute.label : 'Select ' + attribute.label;
     });
   }
 });
@@ -201,29 +197,34 @@ function validateForm() {
 const checkIn = document.getElementById('checkIn');
 const checkOut = document.getElementById('checkOut');
 
-const isValid = [...document.getElementById('subcategories').getElementsByTagName('select')].every(select => select.value !== '');
+const itemElement = document.getElementById('item');
+const areSelectsValid = [...document.getElementById('attributes').getElementsByTagName('select')].every(select => select.value !== '');
+const areItemsValid = itemElement.value != '';
 
+const isValid = areSelectsValid && areItemsValid;
 checkIn.disabled = checkOut.disabled = !isValid;
 }
 
 
 
 function checkInOut(action) {
-const selectedCategory = document.getElementById('category').value;
-const subcategories = categoryToSubcategories[selectedCategory] || [];
-const selectedSubcategories = {};
 
-subcategories.forEach(subcategory => {
-selectedSubcategories[subcategory.key] = document.getElementById(subcategory.key).value;
+const selectedItem = document.getElementById('item').value;
+const attributes = itemAndAttributes[selectedItem] || [];
+const selectedAttributes = {};
+
+attributes.forEach(attribute => {
+selectedAttributes[attribute.key] = document.getElementById(attribute.key).value;
 });
 
 const checkInOutData = {
 action: action,
-category: selectedCategory,
-subcategories: selectedSubcategories
+item: selectedItem,
+attributes: selectedAttributes
 };
 
 //Open the are you sure(confirmation) modal
+
   const yesButton = document.getElementById("yesButton");
   const noButton = document.getElementById("noButton");
   const getSelectedItem = displaySelectedItem();
@@ -233,10 +234,12 @@ subcategories: selectedSubcategories
 
     if(action == 'in') {
     yesButton.onclick = function() {
+      checkout('in');
       openSuccModal('Check in Successful!', getSelectedItem);
     };
   } else if (action == 'out') {
     yesButton.onclick = function() {
+      checkout('out');
       openSuccModal('Check out Successful!', getSelectedItem);
     };
   }
@@ -251,21 +254,21 @@ subcategories: selectedSubcategories
 
 }
 
-function updateDependentOptions(selectedSubcategoryKey) {
-const category = document.getElementById('category').value;
-const subcategories = categoryToSubcategories[category] || [];
+function updateDependentOptions(selectedAttributeKey) {
+const item = document.getElementById('item').value;
+const attributes = itemAndAttributes[item] || [];
 
-subcategories.forEach(subcategory => {
-if (subcategory.dependentOn === selectedSubcategoryKey) {
-  const select = document.getElementById(subcategory.key);
-  const selectedValue = document.getElementById(selectedSubcategoryKey).value;
-  const options = subcategory.options[selectedValue] || [];
+attributes.forEach(attribute => {
+if (attribute.dependentOn === selectedAttributeKey) {
+  const select = document.getElementById(attribute.key);
+  const selectedValue = document.getElementById(selectedAttributeKey).value;
+  const options = attribute.options[selectedValue] || [];
 
   select.innerHTML = '';
 
   const emptyOption = document.createElement('option');
   emptyOption.setAttribute('value', '');
-  emptyOption.innerText = 'Select ' + subcategory.label;
+  emptyOption.innerText = 'Select ' + attribute.label;
   select.appendChild(emptyOption);
 
   options.forEach(optionValue => {
@@ -291,8 +294,8 @@ function resetModal() {
   const checkOut = document.getElementById('checkOut');
   checkIn.disabled = checkOut.disabled = true;
 
-  const subcategories = document.getElementById("subcategories");
-  subcategories.innerHTML = "";
+  const attributes = document.getElementById("attributes");
+  attributes.innerHTML = "";
 }
 
 function openConfModal(message, itemName = '') {
@@ -308,6 +311,7 @@ function closeConfModal() {
 }
 
 function openSuccModal(message, itemName = '') {
+  closeConfModal(); // Make sure confirmation modal is closed to avoid double stacking styling issues.
   var modalMessage = document.getElementById("succModalMessage");
   modalMessage.innerHTML = itemName ? message + '<br>Item: ' + itemName : message;
   const succModal = document.getElementById("successModal");
@@ -323,14 +327,39 @@ function closeSuccModal() {
 
 //This function will display the item details in the successful modal
 function displaySelectedItem() {
-  const selectedCategory = document.getElementById('category').value;
-  const selectedCategoryName = document.getElementById('category').options[document.getElementById('category').selectedIndex].text;
-  const subcategories = categoryToSubcategories[selectedCategory] || [];
-  const selectedSubcategories = [];
+  const selectedItem = document.getElementById('item').value;
+  const selectedItemName = document.getElementById('item').options[document.getElementById('item').selectedIndex].text;
+  const attributes = itemAndAttributes[selectedItem] || [];
+  const selectedAttributes = [];
 
-  subcategories.forEach(subcategory => {
-    selectedSubcategories.push(document.getElementById(subcategory.key).value);
+  attributes.forEach(attribute => {
+    selectedAttributes.push(document.getElementById(attribute.key).value);
   });
 
-  return selectedCategoryName + ' | ' + selectedSubcategories.join(' | ');
+  return selectedItemName + ' | ' + selectedAttributes.join(' | ');
+}
+
+function checkout(action) {
+  // POST request to /checkout
+  const selectedItem = document.getElementById('item').value;
+  const attributes = itemAndAttributes[selectedItem] || [];
+  const selectedAttributes = {};
+  
+  attributes.forEach(attribute => {
+      selectedAttributes[attribute.key] = document.getElementById(attribute.key).value;
+  });
+  fetch('http://localhost:3000/api/checkout', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+     body: JSON.stringify({
+      "action": action,
+      "wheres":selectedAttributes, 
+      "table": selectedItem
+     })
+  })
+  .then(response => response.json())
+  .then(response => console.log(JSON.stringify(response)))
+  .catch(error => console.error(error))
 }
