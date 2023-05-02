@@ -18,16 +18,16 @@ const itemAndAttributes = {
       {
           key: 'device_type',
           label: 'Type',
-          options: ['power', 'charg', 'strip','misc']
+          options: ['Power Cable', 'Charger', 'Power Strip','Misc']
       },
       {
         key: 'name',
         label: 'Name',
         options: {
-          power: ['PCPowerCable','RoboticsPowCable'],
-          charg: ['LenovoCharger','HP65WCharger','SmartUSBCharger'],
-          misc: ['Dell7040mini','ACAdapterMSSurface','XP1S12','HeavyDutyExtCord','SurgeSupressor','AltivaExtender','OrangeExtCord','ExtensionCord'],
-          strip: ['NormalPowerStrip','SmallpowerStrip','AppSurgeStrip']
+          'Power Cable': ['PC Power Cable','Robotics Power Cable'],
+          Charger: ['Lenovo Charger','HP65W Charger','Smart USB Charger'],
+          Misc: ['Dell 7040 Mini','AC Adapter MS Surface','XP1S12','Heavy Duty Extension Cord','Surge Supressor','Altiva Extender','Orange Extension Cord','Extension Cord'],
+          'Power Strip': ['Normal Power Strip','Small Power Strip','App Surge Strip']
         },
         dependentOn: 'device_type'
       }
@@ -51,17 +51,17 @@ const itemAndAttributes = {
     {
         key: 'cable_type',
         label: 'Type',
-        options: ['mic','con','aux', 'misc']
+        options: ['Microphone','Connector','Aux', 'Misc']
     },
     {
         key: 'name',
         label: 'Name',
         options: {
-          mic: ['iRigMic','3RingExt','AWMCable','SmallMic'],
-          con: ['RWYCables','rc59/uCable'],
-          aux: ['AppleHeadJack','RWAuxSplit','USBctoAuxSplitter','AppleHeadJack','YellowWhiteSplit','BerkelinTable','LabtecAux','MaleToFemale','GreenRedAux',
-                'BelkinStereoExt','3.5mmStereoCable','AuxSplitter','HeadsetAuxSplit',],
-          misc: ['RYWHeadExt','3AWMCable','USBCtoAudioJack','BerlinSplitter','GreenRedSplitter','WoodedVoipAdapt','HeadsetAdapt']
+          Microphone: ['iRigMic','3 Ring Extender','AWM Cable','Small Mic'],
+          Connector: ['RWY Cables','rc59/uCable'],
+          Aux: ['Apple Headphone Jack','RW Aux Splitter','USB mC to Aux Splitter','Yellow and White Splitter','Berkelin Table','Labtec Aux','Male To Female','Green and Red Aux',
+                'Belkin Stereo Extender','3.5mm Stereo Cable','Aux Splitter','Headset Aux Splitter',],
+          Misc: ['RYW Head Extender','3AWM Cable','USB C to Audio Jack','Berlin Splitter','Green and Red Splitter','Wooded Voip Adapter','Headset Adapter']
         },
         dependentOn: 'cable_type'
     }
@@ -86,17 +86,17 @@ const itemAndAttributes = {
       {
           key: 'cable_type',
           label: 'Type',
-          options: ['dvi','vga','hdmi','display','adapt','misc']
+          options: ['DVI','VGA','HDMI','Display Port','Misc']
       },
       {
           key: 'name',
           label: 'Name',
           options: {
-             dvi: ['DVIcable','DVItoHDMI','DVAtoVGAAdapt'],
-             vga: ['VGAcable','VGAtoDVI','EthernettoVGA'],
-             hdmi: ['HDMIcable','IP5toHDMI','miniHDMI to HDMI','miniHDMItoUSB','MicroHDMI'],
-             misc: ['DocktoIpad','TouchMonitor'],
-             display: ['DisplaytoHDMI','DisplaytoDVI','DisplayPort','DisplaytoHDMI','DisplaytoVGA','DisplaytoMiniDisplay']
+             DVI: ['DVI Cable','DVI to HDMI','DVI to VGA Adapter'],
+             VGA: ['VGA Cable','VGA to DVI','Ethernet to VGA'],
+             HDMI: ['HDMI Cable','IP5 to HDMI','Mini HDMI to HDMI','Mini HDMI to USB','Micro HDMI'],
+             Misc: ['DocktoIpad','TouchMonitor'],
+             'Display Port': ['Display to HDMI','Display to DVI','Display Port','Display to HDMI','Display to VGA','Display to Mini Display']
           },
           dependentOn: 'cable_type'
       }   
@@ -108,24 +108,23 @@ const itemAndAttributes = {
           options: ['Long','Short']
       }
   ],
-  // ext, usbC, adapt, micro, flash, atob, type3, misc
   USB: [
       {
           key: 'connector',
           label: 'Connector',
-          options: ['ext','usbc','micro','flash','type3','misc']
+          options: ['Extenders','USB C','Micro USB','Flash Drive','Type 3','Misc']
       },
       {
           key: 'name',
           label: 'Name',
           options: {
-              ext: ['USBExt', 'USB2.0', 'USB3', 'USBA'],
-              misc: ['USBAtoB', 'FireWiretoMicroUSB', 'USBtoEthernetAdapter', 'MaleAtoFemaleA', 'TypeAtoMicroB', 'USBtoVGA', 'USBBlock',
-                     'FireWire','USBCtominiHDMI','USBCtoHeadphoneJack'],
-              micro: ['microUSB','MicrotoHDMI'],
-              type3: ['usbtotype3'],
-              usbc: ['USBCtoMaleA', 'USBCtoC', 'USBCtoFemaleA','USBCtoTypeB','USBCtoUSBC','USBCtoUSBB'],
-              flash: ['16gbUSBDrive']
+              Extenders: ['USBExt', 'USB2.0', 'USB3', 'USBA'],
+              Misc: ['USB A to B', 'Fire Wire to MicroUSB', 'USB to Ethernet Adapter', 'Male A to Female A', 'Type A to Micro USB-B', 'USB to VGA', 'USB Block',
+                     'Fire Wire','USB C to Mini HDMI','USB C to Headphone Jack'],
+              'Micro USB': ['Micro USB','Micro USB to HDMI'],
+              'Type 3': ['Usb to Type 3'],
+              'USB C': ['USB C to MaleA', 'USB C to C', 'USB C to Female USB A','USB C to Type B','USB C to USB C','USB C to USB B'],
+              'Flash Drive': ['16gb USB Flash Drive']
           },
           dependentOn: 'connector'
       }
@@ -212,43 +211,6 @@ reqBtn.disabled = !isValid;
 
 }
 
-
-
-function reqItem(action) {
-  const selectedItem = document.getElementById('item').value;
-  const attributes = itemAndAttributes[selectedItem] || [];
-  const selectedAttributes = {};
-  
-  attributes.forEach(attribute => {
-  selectedAttributes[attribute.key] = document.getElementById(attribute.key).value;
-  });
-
-  const reqItemData = {
-  action: action,
-  item: selectedItem,
-  attributes: selectedAttributes
-  };
-
-//Open the are you sure(confirmation) modal
-  const yesButton = document.getElementById("yesButton");
-  const noButton = document.getElementById("noButton");
-  const getSelectedItem = displaySelectedItem();
-
-  if(action === 'req') {
-    openConfModal('Are You Sure?', getSelectedItem);
-
-    yesButton.onclick = function() {
-      openSuccModal('Your Request Has Submitted!', getSelectedItem);
-    };
-    noButton.onclick = function() {
-      closeConfModal();
-    };
-  }
-  //Use this log to test if the object keys are being processed
-  // console.log(reqItemData);
-
-}
-
 function updateDependentOptions(selectedAttributeKey) {
   const item = document.getElementById('item').value;
   const attributes = itemAndAttributes[item] || [];
@@ -279,7 +241,7 @@ function updateDependentOptions(selectedAttributeKey) {
   }
 
 
-function resetModal() {
+function resetForm() {
   // Reset the form
   const mainForm = document.getElementById("mainForm");
   mainForm.reset();
@@ -290,37 +252,13 @@ function resetModal() {
 
   const attributes = document.getElementById("attributes");
   attributes.innerHTML = "";
+
+  location.reload();
 }
 
-function openConfModal(message, itemName = '') {
-  const confirmationModal = document.getElementById("confirmationModal");
-  confirmationModal.style.display = "block";
-  var modalMessage = document.getElementById("confModalMessage");
-  modalMessage.innerHTML = itemName ? message + '<br>Item: ' + itemName : message;
-}
 
-function closeConfModal() {
-  const confirmationModal = document.getElementById("confirmationModal");
-  confirmationModal.style.display = "none";
-}
-
-function openSuccModal(message, itemName = '') {
-  closeConfModal(); // Make sure confirmation modal is closed to avoid double stacking styling issues.
-  var modalMessage = document.getElementById("succModalMessage");
-  modalMessage.innerHTML = itemName ? message + '<br>Item: ' + itemName : message;
-  const succModal = document.getElementById("successModal");
-  succModal.style.display = "block";
-}
-
-function closeSuccModal() {
-  const succModal = document.getElementById("successModal");
-  closeConfModal();
-  resetModal();
-  succModal.style.display = "none";
-}
-
-//This function will display the item details in the successful modal
-function displaySelectedItem() {
+//This function will display the item and its attributes in the email
+function emailSelectedItem() {
   const selectedItem = document.getElementById('item').value;
   const selectedItemName = document.getElementById('item').options[document.getElementById('item').selectedIndex].text;
   const attributes = itemAndAttributes[selectedItem] || [];
@@ -335,5 +273,7 @@ function displaySelectedItem() {
 
 function handleSubmit(event) {
   event.preventDefault(); // This line prevents the form from resetting, which is the default for a form button since it acts as a submit button
-  reqItem('req');
+
+ // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+  window.location = 'mailto:jcummings@towson.edu?subject=' + encodeURIComponent('Requesting to Check Out an Item') + '&body=' + encodeURIComponent('Requesting: ' + emailSelectedItem()) + '%0A' + encodeURIComponent(' ');
 }

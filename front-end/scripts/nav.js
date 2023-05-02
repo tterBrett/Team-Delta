@@ -18,13 +18,15 @@ toggle between hiding and showing the dropdown content */
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
-  document.getElementById("sidebar-caret").src = "../images/icons8-chevron-up-30.png";
+  const caret = document.getElementById("sidebar-caret");
   const dropdownContent = document.getElementById("myDropdown");
   if (dropdownContent.style.maxHeight === "0px" || dropdownContent.style.maxHeight === "") {
     const totalHeight = Array.from(dropdownContent.children).reduce((sum, child) => sum + child.offsetHeight, 0);
     dropdownContent.style.maxHeight = totalHeight + "px";
+    caret.src = "../images/icons8-chevron-up-30.png";
   } else {
     dropdownContent.style.maxHeight = "0px";
+    caret.src = "../images/icons8-chevron-down-30.png";
   }
   
 }
@@ -33,18 +35,12 @@ function myFunction() {
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   console.log("in function")
-  let shows = document.getElementsByClassName("show")
-  let isShown = true ? shows === undefined || shows.length == 0 : false;
-  if(isShown){
-    document.getElementById("sidebar-caret").src = "../images/icons8-chevron-down-30.png";
-  }
-  else{
-    document.getElementById("sidebar-caret").src = "../images/icons8-chevron-up-30.png";
-  }
   if (!event.target.matches(['.sidebar-link', '.sidebar-icon', '.middle-sidebar-list'])) {
     const dropdownContent = document.getElementById("myDropdown");
+    const caret = document.getElementById("sidebar-caret");
+
     dropdownContent.style.maxHeight = "0px";
-    document.getElementById("sidebar-caret").src = "../images/icons8-chevron-down-30.png";
+    caret.src = "../images/icons8-chevron-down-30.png";
 
   }
     }
