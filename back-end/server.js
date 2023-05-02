@@ -124,24 +124,28 @@ app.post('/api/checkout', async (req, res) => {
     
     const sql = `SELECT unique_ID FROM inventory.${req.body.table} ${whereClause} AND checked_Out = ${action} LIMIT 1;`;
     console.log("selection", sql);
-
     (async () => {
         try {
             const rows = await query(sql);
+            const quantity = true;
             if(rows.length > 0){
                 let updateQuery = `UPDATE inventory.${req.body.table} SET checked_Out = ${!action} ${whereClause} AND unique_ID = '${rows[0]['unique_ID']}'`
                 const updatedStatus = await query(updateQuery)
                 if(updatedStatus['changedRows'] == 1){
+                    res.json ({ success: true});
                     console.log("transaction was succesful")
                 }else{
+                    res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
                     console.log("The transaction did not sucessfully go through. Please try again.")
                 }
             }
             else{
-                console.log("Unable to process transaction. Insuffecient quantiy for this action.")
+                res.json({ success: false, errMessage: "Unable to process transaction. Insufficient quantity for this action. Please try again."});
+                console.log("Unable to process transaction. Insufficient quantity for this action.")
             }
             
         } catch(err){
+            res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
             console.log("ERROR\n", err)
         }
     })()
@@ -182,20 +186,76 @@ app.post('/api/addItem', async (req, res) => {
                 console.log("insert statement:", insertQuery)
                 const insertStatus = await query(insertQuery)
                 if(insertStatus['affectedRows'] == 1){
+                    res.json({success: true});
                     console.log("transaction was succesful")
                 }else{
+                    res.json({success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
                     console.log("The transaction did not sucessfully go through. Please try again.")
                 }
             }
             else{
+                res.json({success: false, errMessage: "Unable to process transaction. Insuffecient quantiy for this action."});
                 console.log("Unable to process transaction. Insuffecient quantiy for this action.")
             }
             
         } catch(err){
+            res.json({success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
             console.log("ERROR\n", err)
         }
     })()
 })
+
+app.post('/api/deleteItem', async (req, res) => {
+    console.log("endpoint hit")
+    const query = util.promisify(connection.query).bind(connection);
+
+    let i = 1
+    let whereClause = ""
+    let insertClause = ""
+
+    for (const [key, value] of Object.entries(req.body.wheres)) {
+        if(i == 1){
+            whereClause = `WHERE ${key} = '${value}' ` 
+            insertClause = `'${value}'`
+        }else{
+            whereClause += `AND ${key} = '${value}'`
+            insertClause += `,'${value}'`
+        }
+        i = i + 1;
+    }
+
+    const sql = `SELECT MAX(unique_ID) FROM inventory.${req.body.table} ${whereClause} AND checked_Out = 0 LIMIT 1;`;
+    console.log("selection", sql);
+
+    (async () => {
+        try {
+            const rows = await query(sql);
+            if(rows.length > 0){
+                console.log(rows);
+                let deleteQuery = `DELETE FROM inventory.${req.body.table} ${whereClause} AND checked_Out = 0 ORDER BY unique_ID DESC LIMIT 1`
+                console.log("delete statement:", deleteQuery)
+                const deleteStatus = await query(deleteQuery)
+                if(deleteStatus['affectedRows'] == 1){
+                    res.json ({ success: true});
+                    console.log("transaction was succesful")
+                }else{
+                    res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+                    console.log("The transaction did not sucessfully go through. Please try again.")
+                }
+            }
+            else{
+                res.json({ success: false, errMessage: "Unable to process transaction. Insufficient quantity for this action. Please try again."});
+                console.log("Unable to process transaction. Insufficient quantity for this action.")
+            }
+            
+            
+        } catch(err){
+            res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+            console.log("ERROR\n", err)
+        }
+    })()
+})
+
 
 app.get("/api/home", (req, res) => {
     res.send("this is the body. you made it home");
