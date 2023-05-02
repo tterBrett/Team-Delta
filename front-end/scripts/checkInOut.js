@@ -55,7 +55,19 @@ const itemAndAttributes = {
       {
           key: 'cable_type',
           label: 'Type',
-          options: ['mic','con','aux']
+          options: ['mic','con','aux', 'misc']
+      },
+      {
+          key: 'name',
+          label: 'Name',
+          options: {
+            mic: ['iRigMic','3RingExt','AWMCable','SmallMic'],
+            con: ['RWYCables','rc59/uCable'],
+            aux: ['AppleHeadJack','RWAuxSplit','USBctoAuxSplitter','YellowWhiteSplit','BerkelinTable','LabtecAux','MaleToFemale','GreenRedAux',
+                  'BelkinStereoExt','3.5mmStereoCable','AuxSplitter','HeadsetAuxSplit',],
+            misc: ['RYWHeadExt','3AWMCable','USBCtoAudioJack','BerlinSplitter','GreenRedSplitter','WoodedVoipAdapt','HeadsetAdapt']
+          },
+          dependentOn: 'cable_type'
       }
   ],
   Switches: [
@@ -194,7 +206,6 @@ function populateAttributes() {
 
 
 function validateForm() {
-console.log("poop");
 const checkIn = document.getElementById('checkIn');
 const checkOut = document.getElementById('checkOut');
 
@@ -228,20 +239,20 @@ attributes: selectedAttributes
 
   const yesButton = document.getElementById("yesButton");
   const noButton = document.getElementById("noButton");
-  const getSelectedItem = displaySelectedItem();
 
   if (action === 'in' || action === 'out') {
-    openConfModal('Are You Sure?', getSelectedItem);
+    openConfModal('Are You Sure?', displaySelectedItem());
 
     if(action == 'in') {
     yesButton.onclick = function() {
       checkout('in');
-      openSuccModal('Check in Successful!', getSelectedItem);
+      // resetForm();
+      // openSuccModal('Check in Successful!', getSelectedItem);
     };
   } else if (action == 'out') {
     yesButton.onclick = function() {
       checkout('out');
-      openSuccModal('Check out Successful!', getSelectedItem);
+      // resetForm();
     };
   }
 
@@ -285,7 +296,7 @@ validateForm();
 }
 
 
-function resetModal() {
+function resetForm() {
   // Reset the form
   const mainForm = document.getElementById("mainForm");
   mainForm.reset();
@@ -297,6 +308,9 @@ function resetModal() {
 
   const attributes = document.getElementById("attributes");
   attributes.innerHTML = "";
+
+  //refresh the page
+  location.reload();
 }
 
 function openConfModal(message, itemName = '') {
@@ -312,7 +326,7 @@ function closeConfModal() {
 }
 
 function openSuccModal(message, itemName = '') {
-  closeConfModal(); // Make sure confirmation modal is closed to avoid double stacking styling issues.
+  closeConfModal();
   var modalMessage = document.getElementById("succModalMessage");
   modalMessage.innerHTML = itemName ? message + '<br>Item: ' + itemName : message;
   const succModal = document.getElementById("successModal");
@@ -322,7 +336,6 @@ function openSuccModal(message, itemName = '') {
 function closeSuccModal() {
   const succModal = document.getElementById("successModal");
   closeConfModal();
-  resetModal();
   succModal.style.display = "none";
 }
 
@@ -361,6 +374,22 @@ function checkout(action) {
      })
   })
   .then(response => response.json())
-  .then(response => console.log(JSON.stringify(response)))
+  .then(response => {
+    const okBtn = document.getElementById('ok');
+    console.log(JSON.stringify(response));
+    if (response.success && action == 'in') {
+      openSuccModal('Check in Successful!', displaySelectedItem());
+      okBtn.onclick = function() {
+      resetForm();
+      }
+    } else if (response.success && action == 'out') {
+      openSuccModal('Check out Successful!', displaySelectedItem());
+      okBtn.onclick = function() {
+        resetForm();
+        }
+    } else {
+      openSuccModal(response.errMessage);
+    }
+  })
   .catch(error => console.error(error))
 }

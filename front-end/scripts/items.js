@@ -24,7 +24,7 @@ async function fetchData(selection){
   async function gatherData(selection) {
     let requiredTables = []
     let results = []
-
+    console.log("SELECTION", selection)
 
     //Similar to the items and attributes in the form object map, this object maps keys to title names, and makes them the header of the table page 
     const tableName = {
@@ -185,6 +185,7 @@ async function fetchData(selection){
 //Onclick of dropdown selection, this function creates a new URL path for the selection in items.html, with a hash with the name of the table
 //This way it still executes the gatherData() function even on page reload
 function loadResults(selection) {
+    console.log("loadResults", selection)
     window.location.href = 'items.html#' + selection;
 }
 
@@ -270,4 +271,3 @@ function drawResults(results){
     target.appendChild(table_wrapper);
 
 }
-

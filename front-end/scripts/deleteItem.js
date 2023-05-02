@@ -1,8 +1,8 @@
 const itemAndAttributes = {
     //**FUTURE PROJECT**
-    //  If Kyle adds a new item, for example a new firewall with a different brand and name,
-    //  it will add the item to the database, but not to the dropdown menus here. A project is to 
-    //  make it so kyle can select other for any attribute, and then enter the name himself to match the database to add an item.
+    //  If Kyle deletes an item, for example a new firewall with a different brand and name,
+    //  it will delete the item to the database, but not to the dropdown menus here. A project is to 
+    //  make it so kyle can select other for any attribute, and then enter the name himself to match the database to delete an item.
     MSE: [
         {
             key: 'brand',
@@ -90,7 +90,7 @@ const itemAndAttributes = {
         {
             key: 'cable_type',
             label: 'Type',
-            options: ['dvi','vga','hdmi','display','adapt','misc']
+            options: ['dvi','vga','hdmi','display','misc']
         },
         {
             key: 'name',
@@ -205,20 +205,20 @@ const itemAndAttributes = {
   
   
   function validateForm() {
-  const addBtn = document.getElementById('addItemBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
   
   const itemElement = document.getElementById('item');
   const areSelectsValid = [...document.getElementById('attributes').getElementsByTagName('select')].every(select => select.value !== '');
   const areItemsValid = itemElement.value != '';
   
   const isValid = areSelectsValid && areItemsValid;  
-  addBtn.disabled = !isValid;
+  deleteBtn.disabled = !isValid;
   
   }
   
   
   
-  function addItem(action) {
+  function deleteItem(action) {
     const selectedItem = document.getElementById('item').value;
     const attributes = itemAndAttributes[selectedItem] || [];
     const selectedAttributes = {};
@@ -227,7 +227,7 @@ const itemAndAttributes = {
     selectedAttributes[attribute.key] = document.getElementById(attribute.key).value;
     });
   
-    const addItemData = {
+    const deleteItemData = {
     action: action,
     item: selectedItem,
     attributes: selectedAttributes
@@ -238,18 +238,19 @@ const itemAndAttributes = {
     const noButton = document.getElementById("noButton");
     const getSelectedItem = displaySelectedItem();
   
-    if(action === 'add') {
+    if(action === 'delete') {
       openConfModal('Are You Sure?', getSelectedItem);
   
       yesButton.onclick = function() {
-        addNewItem();
+        deleteItemPost();
+        openSuccModal('Item Successfully deleteed!', getSelectedItem);
       };
       noButton.onclick = function() {
         closeConfModal();
       };
     }
     //Use this log to test if the object keys are being processed
-    // console.log(addItemData);
+    // console.log(deleteItemData);
   
   }
   
@@ -289,8 +290,8 @@ const itemAndAttributes = {
     mainForm.reset();
   
     // Reset the check in and check out buttons
-    const addBtn = document.getElementById('addItemBtn');
-    addBtn.disabled = true;
+    const deleteBtn = document.getElementById('deleteBtn');
+    deleteBtn.disabled = true;
   
     const attributes = document.getElementById("attributes");
     attributes.innerHTML = "";
@@ -341,11 +342,11 @@ const itemAndAttributes = {
   
   function handleSubmit(event) {
     event.preventDefault(); // This line prevents the form from resetting, which is the default for a form button since it acts as a submit button
-    addItem('add');
+    deleteItem('delete');
   }
 
-  function addNewItem() {
-    // POST request to /addItem
+  function deleteItemPost() {
+    // POST request to /deleteItem
     const selectedItem = document.getElementById('item').value;
     const attributes = itemAndAttributes[selectedItem] || [];
     const selectedAttributes = {};
@@ -354,7 +355,7 @@ const itemAndAttributes = {
         selectedAttributes[attribute.key] = document.getElementById(attribute.key).value;
     });
   
-    fetch('http://localhost:3000/api/addItem', {
+    fetch('http://localhost:3000/api/deleteItem', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -364,19 +365,18 @@ const itemAndAttributes = {
           "table": selectedItem
         })
     })
+
     .then(response => response.json())
     .then(response => {
-      const okBtn = document.getElementById('ok');
-      console.log(JSON.stringify(response));
-      if (response.success) {
-        openSuccModal('Item Added Successfully!', displaySelectedItem());
-        okBtn.onclick = function() {
-        resetForm();
+        const okBtn = document.getElementById('ok');
+        console.log(JSON.stringify(response));
+        if (response.success) {
+          openSuccModal('Item Deleted Successfully!', displaySelectedItem());
+          okBtn.onclick = function() {
+          resetForm();
+          }
+        } else {
+          openSuccModal(response.errMessage);
         }
-      } else {
-        openSuccModal(response.errMessage);
-      }
-    })
-    .catch(error => console.error(error))
-
+      })
   }
