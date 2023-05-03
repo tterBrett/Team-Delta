@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Inventory</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="../styles/nav.css">
+  <link rel="stylesheet" types="text/css" href="../styles/styles.css">
+</head>
+<body>
+  <div class="header">
+    <div class="header-title">
+      Techhub
+    </div>
+  </div>
+  <div class="sidebar">
+    <a href="index.html">
+      <div class="top-sidebar">
+        <img class="towson-logo" src="../images/Towson logo.png">
+      </div>
+    </a>
+    <div class="middle-sidebar">
+      <a href="index.html">
+      <div class="middle-sidebar-list">
+        <div class="icon-container">
+          <img class="sidebar-icon" src="../images/icons8-home-48.png">
+        </div>
+          <h2 class="sidebar-link">Home</h2>
+      </div>
+    </a>
+      <div class="dropdown">
+        <div class="middle-sidebar-list" onclick="myFunction()">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="../images/icons8-in-inventory-49.png">
+          </div>
+            <h2 class="sidebar-link">Inventory</h2>
+            <div class="caret">
+              <img id="sidebar-caret" src="../images/icons8-chevron-down-30.png">
+            </div>
+        </div>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#MSE"> Mouses</a>
+          <a href="#KeyB"> Keyboards</a>
+          <a href="#PowerSupply"> Power Supply</a>
+          <a href="#USB"> USB</a>
+          <a href="#Ethernet"> Ethernet Cables</a>
+          <a href="#Visual"> Visual Cables</a>
+          <a href="#Switches"> Switches</a>
+          <a href="#FireWall"> Firewalls</a>
+          <a href="#Audio"> Audio Cables</a>
+          <a href="#Other">Other</a>
+        </div>
+      </div>
+      <a href="make-request.html">
+      <div class="middle-sidebar-list">
+        <div class="icon-container">
+          <img class="sidebar-icon" src="../images/icons8-data-transfer-48.png">
+        </div>
+          <h2 class="sidebar-link">Make Request</h2>
+      </div>
+    </a>
+      <a href="checkInOut.html">
+      <div class="middle-sidebar-list">
+        <div class="icon-container">
+          <img class="sidebar-icon" src="../images/icons8-check-all-48.png">
+        </div>
+          <h2 class="sidebar-link">Check In/Out Item</h2>
+      </div>
+    </a>
+      <a href="addItem.html">
+      <div class="middle-sidebar-list">
+        <div class="icon-container">
+          <img class="sidebar-icon" src="../images/icons8-add-48.png">
+        </div>
+          <h2 class="sidebar-link">Add Item</h2>
+      </div>
+    </a>
+      <a href="deleteItem.html">
+      <div class="middle-sidebar-list">
+        <div class="icon-container">
+          <img class="sidebar-icon" src="../images/icons8-del-48.png">
+        </div>
+          <h2 class = "sidebar-link">Delete Item</h2>
+      </div>
+      </a>
+    </div>
+  </div>
+  <div class="main-table">
+    <div id="content">
+      If you are seeing this, the item tables did not load properly
+      <div class="item-select-wrapper">
+        
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/nav.js"></script>
+  <script src="../scripts/items.js"></script>
+</body>
+</html>
