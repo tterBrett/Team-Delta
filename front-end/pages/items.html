@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>TechHub</title>
+  <title>Inventory</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
 <body>
   <div class="header">
     <div class="header-title">
-      Inventory
+      Techhub
     </div>
   </div>
   <div class="sidebar">
@@ -28,69 +28,69 @@
       </div>
     </a>
     <div class="middle-sidebar">
+      <a href="index.html">
       <div class="middle-sidebar-list">
         <div class="icon-container">
           <img class="sidebar-icon" src="../images/icons8-home-48.png">
         </div>
-        <a href="index.html">
           <h2 class="sidebar-link">Home</h2>
-        </a>
       </div>
+    </a>
       <div class="dropdown">
-        <div class="middle-sidebar-list">
+        <div class="middle-sidebar-list" onclick="myFunction()">
           <div class="icon-container">
-            <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-49.png">
+            <img class="sidebar-icon" src="../images/icons8-in-inventory-49.png">
           </div>
-          <h2 onclick="myFunction()" class="sidebar-link">Inventory</h2>
-          <div class="caret">
-            <img onclick="myFunction()" onclick="change()" id="sidebar-caret" src="../images/icons8-chevron-down-30.png">
-          </div>
+            <h2 class="sidebar-link">Inventory</h2>
+            <div class="caret">
+              <img id="sidebar-caret" src="../images/icons8-chevron-down-30.png">
+            </div>
         </div>
         <div id="myDropdown" class="dropdown-content">
-          <a onClick = "gatherData('MSE')" > Mouses</a>
-          <a onClick = "gatherData('KeyB')" > Keyboards</a>
-          <a onClick = "gatherData('PowerSupply')" > Power Supply</a>
-          <a onClick = "gatherData('USB')" > USB</a>
-          <a onClick = "gatherData('Ethernet')" > Ethernet Cables</a>
-          <a onClick = "gatherData('Visual')" > Visual Cables</a>
-          <a onClick = "gatherData('Switches')" > Switches</a>
-          <a onClick = "gatherData('FireWall')" > Firewalls</a>
-          <a onClick = "gatherData('Audio')" > Audio Cables</a>
-          <a onClick = "gatherData('Other')" >Other</a>
+          <a href="#MSE"> Mouses</a>
+          <a href="#KeyB"> Keyboards</a>
+          <a href="#PowerSupply"> Power Supply</a>
+          <a href="#USB"> USB</a>
+          <a href="#Ethernet"> Ethernet Cables</a>
+          <a href="#Visual"> Visual Cables</a>
+          <a href="#Switches"> Switches</a>
+          <a href="#FireWall"> Firewalls</a>
+          <a href="#Audio"> Audio Cables</a>
+          <a href="#Other">Other</a>
         </div>
       </div>
+      <a href="make-request.html">
       <div class="middle-sidebar-list">
         <div class="icon-container">
           <img class="sidebar-icon" src="../images/icons8-data-transfer-48.png">
         </div>
-        <a href="make-request.html">
           <h2 class="sidebar-link">Make Request</h2>
-        </a>
       </div>
+    </a>
+      <a href="checkInOut.html">
       <div class="middle-sidebar-list">
         <div class="icon-container">
           <img class="sidebar-icon" src="../images/icons8-check-all-48.png">
         </div>
-        <a href="checkInOut.html">
           <h2 class="sidebar-link">Check In/Out Item</h2>
-        </a>
       </div>
+    </a>
+      <a href="addItem.html">
       <div class="middle-sidebar-list">
         <div class="icon-container">
           <img class="sidebar-icon" src="../images/icons8-add-48.png">
         </div>
-        <a href="addItem.html">
           <h2 class="sidebar-link">Add Item</h2>
-        </a>
       </div>
+    </a>
+      <a href="deleteItem.html">
       <div class="middle-sidebar-list">
         <div class="icon-container">
-          <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-del-48.png">
+          <img class="sidebar-icon" src="../images/icons8-del-48.png">
         </div>
-        <a href="deleteItem.html" onclick="MyFunction()">
           <h2 class = "sidebar-link">Delete Item</h2>
-        </a> 
       </div>
+      </a>
     </div>
   </div>
   <div class="main-table">

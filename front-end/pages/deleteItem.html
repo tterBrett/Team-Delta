@@ -21,84 +21,83 @@
   
   </head>
   <body>
-      <div class="header">
-          <div class="header-title">
-            Delete Item Form
+    <div class="header">
+      <div class="header-title">
+        Delete Item
+      </div>
+    </div>
+    <div class="sidebar">
+      <a href="index.html">
+        <div class="top-sidebar">
+          <img class="towson-logo" src="../images/Towson logo.png">
+        </div>
+      </a>
+      <div class="middle-sidebar">
+        <a href="index.html">
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="../images/icons8-home-48.png">
+          </div>
+            <h2 class="sidebar-link">Home</h2>
+        </div>
+      </a>
+        <div class="dropdown">
+          <div class="middle-sidebar-list" onclick="myFunction()">
+            <div class="icon-container">
+              <img class="sidebar-icon" src="../images/icons8-in-inventory-49.png">
+            </div>
+              <h2 class="sidebar-link">Inventory</h2>
+              <div class="caret">
+                <img id="sidebar-caret" src="../images/icons8-chevron-down-30.png">
+              </div>
+          </div>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="items.html#MSE"> Mouses</a>
+            <a href="items.html#KeyB"> Keyboards</a>
+            <a href="items.html#PowerSupply"> Power Supply</a>
+            <a href="items.html#USB"> USB</a>
+            <a href="items.html#Ethernet"> Ethernet Cables</a>
+            <a href="items.html#Visual"> Visual Cables</a>
+            <a href="items.html#Switches"> Switches</a>
+            <a href="items.html#FireWall"> Firewalls</a>
+            <a href="items.html#Audio"> Audio Cables</a>
+            <a href="items.html#Other">Other</a>
           </div>
         </div>
-        <div class="sidebar">
-          <a href="index.html">
-            <div class="top-sidebar">
-              <img class="towson-logo" src="../images/Towson logo.png">
-            </div>
-          </a>
-          <div class="middle-sidebar">
-            <div class="middle-sidebar-list">
-              <div class="icon-container">
-                <img class="sidebar-icon" src="../images/icons8-home-48.png">
-              </div>
-              <a href="index.html">
-                <h2 class="sidebar-link">Home</h2>
-              </a>
-            </div>
-            <div class="dropdown">
-              <div class="middle-sidebar-list">
-                <div class="icon-container">
-                  <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-in-inventory-49.png">
-                </div>
-                  <h2 onclick="myFunction()" class="sidebar-link">Inventory</h2>
-                  <div class="caret">
-                    <img onclick="myFunction()" onclick="change()" id="sidebar-caret" src="../images/icons8-chevron-down-30.png">
-                  </div>
-              </div>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="items.html#MSE"> Mouses</a>
-                <a href="items.html#KeyB"> Keyboards</a>
-                <a href="items.html#PowerSupply"> Power Supply</a>
-                <a href="items.html#USB"> USB</a>
-                <a href="items.html#Ethernet"> Ethernet Cables</a>
-                <a href="items.html#Visual"> Visual Cables</a>
-                <a href="items.html#Switches"> Switches</a>
-                <a href="items.html#FireWall"> Firewalls</a>
-                <a href="items.html#Audio"> Audio Cables</a>
-                <a href="items.html#Other">Other</a>
-              </div>
-            </div>
-            <div class="middle-sidebar-list">
-              <div class="icon-container">
-                <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-data-transfer-48.png">
-              </div>
-              <a href="make-request.html" onclick="MyFunction()">
-                <h2 class = "sidebar-link">Make Request</h2>
-              </a>
-            </div>
-            <div class="middle-sidebar-list">
-              <div class="icon-container">
-                <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-check-all-48.png">
-              </div>
-              <a href="checkinout.html">
-                <h2 class = "sidebar-link">Check In/Out Item</h2>
-              </a>
-            </div>
-            <div class="middle-sidebar-list">
-              <div class="icon-container">
-                <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-add-48.png">
-              </div>
-              <a href="addItem.html" onclick="MyFunction()">
-                <h2 class = "sidebar-link">Add Item</h2>
-              </a> 
-            </div>
-            <div class="middle-sidebar-list">
-              <div class="icon-container">
-                <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-del-48.png">
-              </div>
-              <a href="deleteItem.html" onclick="MyFunction()">
-                <h2 class = "sidebar-link">Delete Item</h2>
-              </a> 
-            </div>
+        <a href="make-request.html">
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="../images/icons8-data-transfer-48.png">
           </div>
+            <h2 class="sidebar-link">Make Request</h2>
         </div>
-      
+      </a>
+        <a href="checkInOut.html">
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="../images/icons8-check-all-48.png">
+          </div>
+            <h2 class="sidebar-link">Check In/Out Item</h2>
+        </div>
+      </a>
+        <a href="addItem.html">
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img class="sidebar-icon" src="../images/icons8-add-48.png">
+          </div>
+            <h2 class="sidebar-link">Add Item</h2>
+        </div>
+      </a>
+        <a href="deleteItem.html">
+        <div class="middle-sidebar-list">
+          <div class="icon-container">
+            <img onclick="myFunction()" class="sidebar-icon" src="../images/icons8-del-48.png">
+          </div>
+            <h2 class = "sidebar-link">Delete Item</h2>
+        </div>
+        </a>
+      </div>
+    </div>
         <div class="main">
           <div id="content-home">
                   <form id="mainForm" onsubmit="handleSubmit(event)">
@@ -129,7 +128,6 @@
                   </form>
               </div>
           </div>
-  
           <div id="confirmationModal" class="modal">
               <div class="modal-content">
                   <div class="modal-header">
