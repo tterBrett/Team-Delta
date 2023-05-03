@@ -162,7 +162,7 @@ a {
 }
 
 #img{
-  background-image: url(/front-end/images/towsonClassroom.jpg);
+  background-image: url(../images/towsonClassroom.jpg);
   background-size: cover;
   width: 90%;
   height: 50%;
