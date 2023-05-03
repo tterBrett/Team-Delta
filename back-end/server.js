@@ -160,13 +160,31 @@ app.post('/api/addItem', async (req, res) => {
     let whereClause = ""
     let insertClause = ""
 
+    if(req.body.table == 'Ethernet'){
+        if(req.body.wheres.is_Long == 'Long'){
+            req.body.wheres.is_Long = 1;
+        }else{
+            req.body.wheres.is_Long = 0;
+        }
+    }
+
     for (const [key, value] of Object.entries(req.body.wheres)) {
+
+        // if(i == 1){
+        //     whereClause = `WHERE ${key} = '${value}' ` 
+        //     insertClause = `'${value}'`
+        // }else{
+        //     whereClause += `AND ${key} = '${value}'`
+        //     insertClause += `,'${value}'`
+        // }
+
         if(i == 1){
-            whereClause = `WHERE ${key} = '${value}' ` 
-            insertClause = `'${value}'`
+            whereClause = `WHERE ${key} = '${value}' `
+            //Do not put the value in quotes if it is a value instead of string 
+            insertClause = key === 'is_Long' ? `${value}` : `'${value}'`
         }else{
             whereClause += `AND ${key} = '${value}'`
-            insertClause += `,'${value}'`
+            insertClause += key === 'is_Long' ? `,${value}` : `,'${value}'`        
         }
         i = i + 1;
     }
@@ -211,15 +229,23 @@ app.post('/api/deleteItem', async (req, res) => {
 
     let i = 1
     let whereClause = ""
-    let insertClause = ""
+    // let insertClause = ""
+
+    if(req.body.table == 'Ethernet'){
+        if(req.body.wheres.is_Long == 'Long'){
+            req.body.wheres.is_Long = 1;
+        }else{
+            req.body.wheres.is_Long = 0;
+        }
+    }
 
     for (const [key, value] of Object.entries(req.body.wheres)) {
         if(i == 1){
             whereClause = `WHERE ${key} = '${value}' ` 
-            insertClause = `'${value}'`
+            // insertClause = `'${value}'`
         }else{
             whereClause += `AND ${key} = '${value}'`
-            insertClause += `,'${value}'`
+            // insertClause += `,'${value}'`
         }
         i = i + 1;
     }
