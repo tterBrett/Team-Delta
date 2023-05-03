@@ -243,7 +243,6 @@ const itemAndAttributes = {
   
       yesButton.onclick = function() {
         deleteItemPost();
-        openSuccModal('Item Successfully deleteed!', getSelectedItem);
       };
       noButton.onclick = function() {
         closeConfModal();
