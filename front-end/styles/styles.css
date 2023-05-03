@@ -127,11 +127,10 @@ a {
 
 .main {
   position: fixed;
-  left: 310px;
-  top: 65px;
+  left: 19%;
+  top: 8%;
   right: 0;
   bottom: 0;
-  overflow: auto;
 }
 
 .main-table {
@@ -151,6 +150,7 @@ a {
   height: 100%;
   width: 100%;
   flex-direction: column;
+  
 }
 
 #content{
@@ -163,9 +163,9 @@ a {
 
 #img{
   background-image: url(/front-end/images/towsonClassroom.jpg);
-  height: 400px;
-  width: 1200px;
   background-size: cover;
+  width: 90%;
+  height: 50%;
   border: 5px solid rgb(71, 71, 71);
   border-radius: 5px;
   box-shadow: 1px 2px 6px rgb(124, 124, 124);
@@ -173,7 +173,8 @@ a {
 
 #cardover-lay{
   background: rgba(0, 0, 0, 0.8);
-  height: 400px;
+  height: 100%;
+  width: 100%;
   border-radius: 1px;
 }
 
@@ -211,8 +212,8 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 275px;
-  width: 1200px;
+  height: 35%;
+  width: 90%;
 }
 
 #box{
