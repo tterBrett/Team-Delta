@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  position:relative;
+  position: relative;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -17,18 +17,20 @@
 .dropdown-content a {
   display: block;
   text-decoration: none;
-padding: 10px;
-background-color: #3d3d3d;
-color: white;
-transition: background-color max-height 1s ease;
+  padding: 10px;
+  background-color: #3d3d3d;
+  color: white;
+  transition: background-color max-height 1s ease;
 
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover{
+.dropdown-content a:hover {
   background-color: rgba(172, 170, 170, 0.521);
-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
+.show {
+  display: block;
+}

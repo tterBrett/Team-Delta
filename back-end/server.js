@@ -16,7 +16,9 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 //middleware 
 app.use(cors()); // CORS = Cross-Origin Resource Sharing. Current statement allows all. Would need config for production env
 app.unsubscribe(express.json()); // Removes email in package.json from mailing list
-app.use(express.urlencoded( { extended: true })); // URL parser to read parameters passed
+app.use(express.urlencoded({
+    extended: true
+})); // URL parser to read parameters passed
 app.use(express.json()); // Parses incoming JSON payloads
 
 const connection = mysql.createConnection({
@@ -28,7 +30,7 @@ const connection = mysql.createConnection({
 })
 
 // get routes
-app.get("/",  (req, res) => {
+app.get("/", (req, res) => {
     res.send("hello world");
 })
 
@@ -45,16 +47,16 @@ app.get("/api/tables/:table", (req, res) => {
         "PowerSupply": ["name", "device_type"],
         "Visuals": ["name", "cable_type"],
         "Switches": ["brand", "name"],
-        "FireWall":["brand", "name"],
-        
+        "FireWall": ["brand", "name"],
+
     }
     query = "SELECT distinct "
-    if(Object.keys(tables).includes(req.params.table)){
+    if (Object.keys(tables).includes(req.params.table)) {
         for (const x of (tables[`${req.params.table}`])) {
-            if(i == 1){
+            if (i == 1) {
                 selectClause += x
                 groupByClause += x
-            }else{
+            } else {
                 selectClause += "," + x
                 groupByClause += "," + x
             }
@@ -67,9 +69,8 @@ app.get("/api/tables/:table", (req, res) => {
             console.log(err)
             res.json(rows)
         });
-    }
-    else if(["Ethernet"].includes(req.params.table)){
-       
+    } else if (["Ethernet"].includes(req.params.table)) {
+
         connection.query(`
         select distinct 
 		    CASE 
@@ -82,15 +83,14 @@ app.get("/api/tables/:table", (req, res) => {
         from Inventory.${req.params.table}
         where not checked_out
         group by is_Long;`,
-        
-        (err, rows, fields) => {
-            res.json(rows)
-        });
-    }
-    else{
+
+            (err, rows, fields) => {
+                res.json(rows)
+            });
+    } else {
         res.send("Table does not exist");
     }
-    
+
     // res.send(`Loading table ${req.params.table}`);
 
 })
@@ -105,47 +105,57 @@ app.post('/api/checkout', async (req, res) => {
 
     let action = true ? req.body.action == 'in' : false
     console.log("Wheres: ", req.body.wheres)
-    if(req.body.table == 'Ethernet'){
-        if(req.body.wheres.is_Long == 'Long'){
+    if (req.body.table == 'Ethernet') {
+        if (req.body.wheres.is_Long == 'Long') {
             req.body.wheres.is_Long = 1;
-        }else{
+        } else {
             req.body.wheres.is_Long = 0;
         }
     }
 
     for (const [key, value] of Object.entries(req.body.wheres)) {
-        if(i == 1){
-            whereClause = `WHERE ${key} = '${value}' ` 
-        }else{
+        if (i == 1) {
+            whereClause = `WHERE ${key} = '${value}' `
+        } else {
             whereClause += `AND ${key} = '${value}'`
         }
         i++;
     }
-    
+
     const sql = `SELECT unique_ID FROM inventory.${req.body.table} ${whereClause} AND checked_Out = ${action} LIMIT 1;`;
     console.log("selection", sql);
     (async () => {
         try {
             const rows = await query(sql);
             const quantity = true;
-            if(rows.length > 0){
+            if (rows.length > 0) {
                 let updateQuery = `UPDATE inventory.${req.body.table} SET checked_Out = ${!action} ${whereClause} AND unique_ID = '${rows[0]['unique_ID']}'`
                 const updatedStatus = await query(updateQuery)
-                if(updatedStatus['changedRows'] == 1){
-                    res.json ({ success: true});
+                if (updatedStatus['changedRows'] == 1) {
+                    res.json({
+                        success: true
+                    });
                     console.log("transaction was succesful")
-                }else{
-                    res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+                } else {
+                    res.json({
+                        success: false,
+                        errMessage: "The transaction did not sucessfully go through. Please try again."
+                    });
                     console.log("The transaction did not sucessfully go through. Please try again.")
                 }
-            }
-            else{
-                res.json({ success: false, errMessage: "Unable to process transaction. Insufficient quantity for this action. Please try again."});
+            } else {
+                res.json({
+                    success: false,
+                    errMessage: "Unable to process transaction. Insufficient quantity for this action. Please try again."
+                });
                 console.log("Unable to process transaction. Insufficient quantity for this action.")
             }
-            
-        } catch(err){
-            res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+
+        } catch (err) {
+            res.json({
+                success: false,
+                errMessage: "The transaction did not sucessfully go through. Please try again."
+            });
             console.log("ERROR\n", err)
         }
     })()
@@ -160,10 +170,10 @@ app.post('/api/addItem', async (req, res) => {
     let whereClause = ""
     let insertClause = ""
 
-    if(req.body.table == 'Ethernet'){
-        if(req.body.wheres.is_Long == 'Long'){
+    if (req.body.table == 'Ethernet') {
+        if (req.body.wheres.is_Long == 'Long') {
             req.body.wheres.is_Long = 1;
-        }else{
+        } else {
             req.body.wheres.is_Long = 0;
         }
     }
@@ -178,13 +188,13 @@ app.post('/api/addItem', async (req, res) => {
         //     insertClause += `,'${value}'`
         // }
 
-        if(i == 1){
+        if (i == 1) {
             whereClause = `WHERE ${key} = '${value}' `
             //Do not put the value in quotes if it is a value instead of string 
             insertClause = key === 'is_Long' ? `${value}` : `'${value}'`
-        }else{
+        } else {
             whereClause += `AND ${key} = '${value}'`
-            insertClause += key === 'is_Long' ? `,${value}` : `,'${value}'`        
+            insertClause += key === 'is_Long' ? `,${value}` : `,'${value}'`
         }
         i = i + 1;
     }
@@ -195,7 +205,7 @@ app.post('/api/addItem', async (req, res) => {
     (async () => {
         try {
             const rows = await query(sql);
-            if(rows.length > 0){
+            if (rows.length > 0) {
                 // INSERT INTO MSE VALUES ('0011', 'Dell', 0); 
                 console.log(rows);
                 newId = parseFloat(rows[0]['MAX(unique_ID)']) + 1
@@ -203,21 +213,31 @@ app.post('/api/addItem', async (req, res) => {
                 let insertQuery = `INSERT INTO inventory.${req.body.table} VALUES ${insertClause}`
                 console.log("insert statement:", insertQuery)
                 const insertStatus = await query(insertQuery)
-                if(insertStatus['affectedRows'] == 1){
-                    res.json({success: true});
+                if (insertStatus['affectedRows'] == 1) {
+                    res.json({
+                        success: true
+                    });
                     console.log("transaction was succesful")
-                }else{
-                    res.json({success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+                } else {
+                    res.json({
+                        success: false,
+                        errMessage: "The transaction did not sucessfully go through. Please try again."
+                    });
                     console.log("The transaction did not sucessfully go through. Please try again.")
                 }
-            }
-            else{
-                res.json({success: false, errMessage: "Unable to process transaction. Insuffecient quantiy for this action."});
+            } else {
+                res.json({
+                    success: false,
+                    errMessage: "Unable to process transaction. Insuffecient quantiy for this action."
+                });
                 console.log("Unable to process transaction. Insuffecient quantiy for this action.")
             }
-            
-        } catch(err){
-            res.json({success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+
+        } catch (err) {
+            res.json({
+                success: false,
+                errMessage: "The transaction did not sucessfully go through. Please try again."
+            });
             console.log("ERROR\n", err)
         }
     })()
@@ -231,19 +251,19 @@ app.post('/api/deleteItem', async (req, res) => {
     let whereClause = ""
     // let insertClause = ""
 
-    if(req.body.table == 'Ethernet'){
-        if(req.body.wheres.is_Long == 'Long'){
+    if (req.body.table == 'Ethernet') {
+        if (req.body.wheres.is_Long == 'Long') {
             req.body.wheres.is_Long = 1;
-        }else{
+        } else {
             req.body.wheres.is_Long = 0;
         }
     }
 
     for (const [key, value] of Object.entries(req.body.wheres)) {
-        if(i == 1){
-            whereClause = `WHERE ${key} = '${value}' ` 
+        if (i == 1) {
+            whereClause = `WHERE ${key} = '${value}' `
             // insertClause = `'${value}'`
-        }else{
+        } else {
             whereClause += `AND ${key} = '${value}'`
             // insertClause += `,'${value}'`
         }
@@ -256,27 +276,37 @@ app.post('/api/deleteItem', async (req, res) => {
     (async () => {
         try {
             const rows = await query(sql);
-            if(rows.length > 0){
+            if (rows.length > 0) {
                 console.log(rows);
                 let deleteQuery = `DELETE FROM inventory.${req.body.table} ${whereClause} AND checked_Out = 0 ORDER BY unique_ID DESC LIMIT 1`
                 console.log("delete statement:", deleteQuery)
                 const deleteStatus = await query(deleteQuery)
-                if(deleteStatus['affectedRows'] == 1){
-                    res.json ({ success: true});
+                if (deleteStatus['affectedRows'] == 1) {
+                    res.json({
+                        success: true
+                    });
                     console.log("transaction was succesful")
-                }else{
-                    res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+                } else {
+                    res.json({
+                        success: false,
+                        errMessage: "The transaction did not sucessfully go through. Please try again."
+                    });
                     console.log("The transaction did not sucessfully go through. Please try again.")
                 }
-            }
-            else{
-                res.json({ success: false, errMessage: "Unable to process transaction. Insufficient quantity for this action. Please try again."});
+            } else {
+                res.json({
+                    success: false,
+                    errMessage: "Unable to process transaction. Insufficient quantity for this action. Please try again."
+                });
                 console.log("Unable to process transaction. Insufficient quantity for this action.")
             }
-            
-            
-        } catch(err){
-            res.json({ success: false, errMessage: "The transaction did not sucessfully go through. Please try again."});
+
+
+        } catch (err) {
+            res.json({
+                success: false,
+                errMessage: "The transaction did not sucessfully go through. Please try again."
+            });
             console.log("ERROR\n", err)
         }
     })()

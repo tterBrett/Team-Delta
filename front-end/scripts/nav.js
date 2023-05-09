@@ -2,7 +2,7 @@ var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
+  coll[i].addEventListener("click", function () {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
     if (content.style.display === "block") {
@@ -28,12 +28,12 @@ function myFunction() {
     dropdownContent.style.maxHeight = "0px";
     caret.src = "../images/icons8-chevron-down-30.png";
   }
-  
+
 }
 
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
+window.onclick = function (event) {
   console.log("in function")
   if (!event.target.matches(['.sidebar-link', '.sidebar-icon', '.middle-sidebar-list'])) {
     const dropdownContent = document.getElementById("myDropdown");
@@ -43,18 +43,18 @@ window.onclick = function(event) {
     caret.src = "../images/icons8-chevron-down-30.png";
 
   }
-    }
+}
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const middleSidebarListItems = document.querySelectorAll(".middle-sidebar-list");
 
   middleSidebarListItems.forEach(item => {
-    item.addEventListener("mouseenter", function() {
+    item.addEventListener("mouseenter", function () {
       this.classList.add("middle-sidebar-list-hover");
     });
 
-    item.addEventListener("mouseleave", function() {
+    item.addEventListener("mouseleave", function () {
       this.classList.remove("middle-sidebar-list-hover");
     });
   });
